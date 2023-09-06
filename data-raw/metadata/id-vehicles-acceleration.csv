@@ -1,0 +1,13 @@
+id,emission_source,fuel_type,engine_size_cc,make_year,model
+109,Petrol car,petrol,1500,2009,Madza Verisa
+110,Petrol car,petrol,1500,2009,Suzuki Swift
+111,Petrol car,petrol,2362,2005,Toyota Rav 4
+112,Petrol motorbike,petrol,110,2018,LIFO
+113,Petrol motorbike,petrol,120,2021,LIFO S5
+114,Petrol motorbike,petrol,110,2015,FAN
+115,Diesel pickup-truck,diesel,4104,2015,Toyota Dyna
+116,Diesel pickup-truck,diesel,1500,1989,Nissan Dat Sun
+117,Diesel pickup-truck,diesel,3000,2004,Mitsubishi Carter
+118,Petrol mini-bus,petrol,2000,2004,Mazda Bongo
+119,Petrol mini-bus,petrol,2000,2004,Mazda Bongo
+120,Petrol mini-bus,petrol,1500,2006,Mazda Bongo

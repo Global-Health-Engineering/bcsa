@@ -1,0 +1,7 @@
+id,emission_source,location,time_of_day,weight[g]
+130,Wood,guardian_shelter,afternoon, -
+131,Wood,guardian_shelter,evening, -
+132,Wood,guardian_shelter,morning, -
+133,Charcoal, -, -,100
+134,Charcoal, -, -,100
+135,Charcoal, -, -,100

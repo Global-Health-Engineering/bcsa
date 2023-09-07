@@ -362,6 +362,8 @@ cluster_ranges <- tapply(df_k_means$aae, result$cluster, function(cluster_aae) {
 
 unlist(cluster_ranges)
 
+## the clusters interpretation is - 25% of ff means ff dominating
+## and vice-versa
 # Create a new variable 'aae_range' based on 'aae'
 
 data <- df_mm %>%
@@ -376,13 +378,4 @@ group_by(settlement_id, aae_range)  |>
             bc_ff = mean(ir_bcc),
             bc_bb = mean(ir_bcc))
 
-# Group by 'settlement_id' and 'aae_range', then summarize to count observations
-result <- data %>%
 
-
-result2 <- data %>%
-  group_by(aae_range, settlement_id) %>%
-  summarize(observation_count = n(),
-            bc_br = mean(bc_wb),
-            bc_bc = mean(bc_tr),
-            bc = mean(ir_bcc))

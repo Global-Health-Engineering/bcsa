@@ -366,16 +366,57 @@ unlist(cluster_ranges)
 ## and vice-versa
 # Create a new variable 'aae_range' based on 'aae'
 
-data <- df_mm %>%
-  mutate(aae_range = case_when(
-    aae >= 0 & aae <= 1.328 ~ "ff_dominant",
-    aae > 1.328 & aae <= 1.759 ~ "mixed",
-    aae > 1.759 ~ "bb_dominant"
-  )) |>
-  drop_na()  |>
-group_by(settlement_id, aae_range)  |>
-  summarize(observation_count = n(),
-            bc_ff = mean(ir_bcc),
-            bc_bb = mean(ir_bcc))
+# data <- df_k_means %>%
+#   mutate(aae_range = case_when(
+#     aae >= 0 & aae <= 1.328 ~ "ff_dominant",
+#     aae > 1.328 & aae <= 1.759 ~ "mixed",
+#     aae > 1.759 ~ "bb_dominant"
+#   )) |>
+#   drop_na()  |>
+# group_by(settlement_id, aae_range)  |>
+#   summarize(observation_count = n(),
+#             bc_ff = mean(ir_bcc),
+#             bc_bb = mean(ir_bcc))
+
+
+# create processed data files ---------------------------------------------
+
+## aae experiments data
+
+df_aae_exp <- df_aae_raw
+
+## aae calculated for each aae experiment
+
+aae_calculated <- aae
+
+## mobile monitoring (mm) data
+
+df_mm <- df_smooth |>
+  filter(exp_type == "mobile_monitoring")
+
+### burning events during mm
+
+## personal monitoring (pm) data
+
+df_pm <- df_smooth |>
+  filter(exp_type == "personal_monitoring")
+
+### burning events during pm
+
+## stationary monitoring data
+
+df_sm <- df_smooth |>
+  filter(exp_type == "stationary_monitoring")
+
+## data quality check
+
+### sensor collocation
+
+df_collocation <- df_smooth |>
+  filter(exp_type == "sensor_collocation")
+
+### reduction in negative values after cma
+
+df_negative_count_cma <- df_negative_count
 
 

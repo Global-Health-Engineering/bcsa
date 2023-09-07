@@ -1,4 +1,4 @@
-id,settlement_id,time_of_day,collocation,person_1,person_2
+id,settlement_id,time_of_day,collocation,dc_1,dc_2
 1,Ndirande,Morning,No,Saloni,Jack
 2,Nyambadwe,Morning,No,Saloni,Jack
 3,Sunnyside,Morning,No,Hope,Lennox

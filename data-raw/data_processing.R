@@ -28,7 +28,15 @@ data_structure <- read_csv("data-raw/metadata/data-structure.csv")
 
 ### mobile monitoring id's
 
-id_mobile <- read_csv("data-raw/metadata/id-mobile-monitoring.csv")
+id_mm <- read_csv("data-raw/metadata/id-mobile-monitoring.csv")
+
+### personal monitoring id's
+
+id_pm <- read_csv("data-raw/metadata/id-personal-monitoring.csv")
+
+### stationary monitoring id's
+
+id_sm <- read_csv("data-raw/metadata/id-stationary-monitoring.csv")
 
 ## bc monitoring raw data
 raw_data <- dir_ls("data-raw/")
@@ -232,7 +240,10 @@ for (i in seq_along(unique(df_smooth$id))) {
            blue_babs = smooth::cma(list_df[[i]]$blue_babs, order = 5, silent = TRUE)$fitted)
 }
 
-df_smooth <- bind_rows(list_df)
+### add aae at each observation of smooth dataframe
+
+df_smooth <- bind_rows(list_df) |>
+  mutate(aae = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])))
 
 # calculate aae -----------------------------------------------------------
 
@@ -336,7 +347,7 @@ df_main <- df_smooth |>
 df_k_means <-  df_main |>
   filter(exp_type == "mobile_monitoring") |>
   filter_all(all_vars(!is.infinite(.))) |>
-  left_join(id_mobile, by = "id") |>
+  left_join(id_mm, by = "id") |>
   mutate(aae = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5]))) |>
   filter_all(all_vars(!is.infinite(.))) |>
   filter(!time_of_day %in% "Morning") |>
@@ -392,21 +403,25 @@ aae_calculated <- aae
 ## mobile monitoring (mm) data
 
 df_mm <- df_smooth |>
-  filter(exp_type == "mobile_monitoring")
+  filter(exp_type == "mobile_monitoring") |>
+  left_join(id_mm, by = "id")
+
 
 ### burning events during mm
 
 ## personal monitoring (pm) data
 
 df_pm <- df_smooth |>
-  filter(exp_type == "personal_monitoring")
+  filter(exp_type == "personal_monitoring") |>
+  left_join(id_pm, by = "id")
 
 ### burning events during pm
 
 ## stationary monitoring data
 
 df_sm <- df_smooth |>
-  filter(exp_type == "stationary_monitoring")
+  filter(exp_type == "stationary_monitoring") |>
+  left_join(id_sm, by = "serial_number")
 
 ## data quality check
 
@@ -418,5 +433,17 @@ df_collocation <- df_smooth |>
 ### reduction in negative values after cma
 
 df_negative_count_cma <- df_negative_count
+
+##### for Lars:
+##### following files needs to created
+
+# 1. df_aae_exp
+# 2. aae_calculated
+# 3. df_mm
+# 4. df_pm
+# 5. df_sm
+# 6. df_collocation
+# 7. df_negative_count
+
 
 

@@ -445,5 +445,15 @@ df_negative_count_cma <- df_negative_count
 # 6. df_collocation
 # 7. df_negative_count
 
+# write data --------------------------------------------------------------
+
+usethis::use_data(df_aae_exp,
+                  aae_calculated,
+                  df_mm,
+                  df_pm,
+                  df_sm,
+                  df_collocation,
+                  df_negative_count,
+                  overwrite = TRUE)
 
 

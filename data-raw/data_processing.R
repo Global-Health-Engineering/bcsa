@@ -26,9 +26,12 @@ parameters <- read_csv("data-raw/metadata/MA200-parameters.csv")
 
 data_structure <- read_csv("data-raw/metadata/data-structure.csv")
 
+data_structure_mm_roads <- read_csv("data-raw/metadata/id-mobile-monitoring-roads.csv")
+
 ### mobile monitoring id's
 
 id_mm <- read_csv("data-raw/metadata/id-mobile-monitoring.csv")
+
 
 ### personal monitoring id's
 
@@ -37,6 +40,10 @@ id_pm <- read_csv("data-raw/metadata/id-personal-monitoring.csv")
 ### stationary monitoring id's
 
 id_sm <- read_csv("data-raw/metadata/id-stationary-monitoring.csv")
+
+### sensor collocation id's
+
+id_sc <- read_csv("data-raw/metadata/id-sensor-collocation.csv")
 
 ## bc monitoring raw data
 raw_data <- dir_ls("data-raw/")
@@ -169,7 +176,6 @@ df <- df_0416 |>
   left_join(data_structure,
             by=c("id","session_id","serial_number"))
 
-
 # data smoothing ----------------------------------------------------------
 
 ## count number of negative values in each experiment in raw data
@@ -245,6 +251,96 @@ for (i in seq_along(unique(df_smooth$id))) {
 df_smooth <- bind_rows(list_df) |>
   mutate(aae = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])))
 
+
+### select the mobile monitoring roads data
+
+data_structure_mm_roads <- data_structure_mm_roads |>
+  as_tbl_time(index = date_start)      |>
+  mutate(start_time = ymd_hms(
+    paste(date_start, start_time))) |>
+  mutate(end_time = ymd_hms(
+    paste(date_end, end_time)))
+
+### divide the data of 0416 and 0420 monitors
+
+df_smooth_exc <- df_smooth |>
+  select(- start_time, -end_time)
+
+df_smooth_time <- as_tbl_time(df_smooth_exc, index = date_time)
+
+df_mm_0416 <- tibble()
+df_mm_0420 <- tibble()
+
+FB_mm_0416 <- df_smooth_time |>
+  filter(serial_number == "MA200-0416") |>
+  arrange(date_time)
+
+FB_mm_0420 <- df_smooth_time  |>
+  filter(serial_number == "MA200-0420")  |>
+  arrange(date_time)
+
+data_structure_mm_0416 <- data_structure_mm_roads    |>
+  filter(serial_number == "MA200-0416")  |>
+  arrange(start_time)
+
+data_structure_mm_0420 <- data_structure_mm_roads    |>
+  filter(serial_number == "MA200-0420")  |>
+  arrange(start_time)
+
+### select data between experiments time intervals
+
+for(i in seq_along(unique(data_structure_mm_0416$id_road_type))){
+  test_0416 <- FB_mm_0416                         |>
+    filter_time(
+      data_structure_mm_0416$start_time[i]
+      ~ data_structure_mm_0416$end_time[i])
+
+  test_0416 <- test_0416                       |>
+    mutate(
+      id_road_type = rep(
+        data_structure_mm_0416$id_road_type[i],nrow(test_0416)))
+
+  df_mm_0416 <- df_mm_0416                           |>
+    bind_rows(test_0416)
+}
+
+for(i in seq_along(unique(data_structure_mm_0420$id_road_type))){
+  test_0420 <- FB_mm_0420                         |>
+    filter_time(
+      data_structure_mm_0420$start_time[i]
+      ~ data_structure_mm_0420$end_time[i])
+
+  test_0420 <- test_0420                       |>
+    mutate(
+      id_road_type = rep(
+        data_structure_mm_0420$id_road_type[i],nrow(test_0420)))
+
+  df_mm_0420 <- df_mm_0420                           |>
+    bind_rows(test_0420)
+}
+
+### combine the data of 0416 and 0420
+
+df_mm_road_type <- df_mm_0416 |>
+  bind_rows(df_mm_0420) |>
+  filter(!lat %in% 0,
+         !long %in% 0)|>
+  left_join(id_mm,
+            by=c("id")) |>
+  left_join(data_structure_mm_roads,
+            by = c("id_road_type","id", "serial_number", "session_id", "date_start", "date_end","exp_type"))
+
+# p_aae <- df_mm_road_type |>
+#   filter(type_of_road == "non_main_road") |>
+#   ggplot(aes(x = settlement_id, y = ir_bcc)) +
+#   geom_boxplot(outlier.shape = NA) +
+#   geom_hline(yintercept = 1.55) +
+#   #scale_y_continuous(limits = quantile(df_mm_road_type$aae, c(0.01, 0.90))) +
+#   labs(y= "AAE values") +
+#   facet_wrap(~day_type)
+#
+# p_aae
+
 # calculate aae -----------------------------------------------------------
 
 ## the aae is calculated with and without background correction
@@ -288,8 +384,6 @@ aae <- df_aae_raw |>
          aae_bg_corr = -log(blue_babs_bg_corr/ir_babs_bg_corr)/log((parameters$wavelength[2])/(parameters$wavelength[5])))|>
   arrange(by = exp_type)
 
-## calculate aae mean and sd for each emission source
-
 aae_summary <- aae |>
   group_by(emission_source) |>
   summarise(mean_aae_wo_bg_corr = mean(aae_wo_bg_corr),
@@ -297,7 +391,6 @@ aae_summary <- aae |>
             mean_aae_bg_corr = mean(aae_bg_corr),
             sd_aae_bg_corr = sd(aae_bg_corr),
             count = n())
-
 
 # bc from bb and ff calculation ------------------------------------------
 
@@ -402,7 +495,7 @@ aae_calculated <- aae
 
 ## mobile monitoring (mm) data
 
-df_mm <- df_smooth |>
+df_mm <- df_main |>
   filter(exp_type == "mobile_monitoring") |>
   left_join(id_mm, by = "id")
 
@@ -411,7 +504,7 @@ df_mm <- df_smooth |>
 
 ## personal monitoring (pm) data
 
-df_pm <- df_smooth |>
+df_pm <- df_main |>
   filter(exp_type == "personal_monitoring") |>
   left_join(id_pm, by = "id")
 
@@ -419,7 +512,7 @@ df_pm <- df_smooth |>
 
 ## stationary monitoring data
 
-df_sm <- df_smooth |>
+df_sm <- df_main |>
   filter(exp_type == "stationary_monitoring") |>
   left_join(id_sm, by = "serial_number")
 
@@ -427,8 +520,9 @@ df_sm <- df_smooth |>
 
 ### sensor collocation
 
-df_collocation <- df_smooth |>
-  filter(exp_type == "sensor_collocation")
+df_collocation <- df_main |>
+  filter(exp_type == "sensor_collocation") |>
+  left_join(id_sc, by = "id")
 
 ### reduction in negative values after cma
 
@@ -450,6 +544,7 @@ df_negative_count_cma <- df_negative_count
 usethis::use_data(df_aae_exp,
                   aae_calculated,
                   df_mm,
+                  df_mm_road_type,
                   df_pm,
                   df_sm,
                   df_collocation,

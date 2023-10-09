@@ -132,7 +132,7 @@ id_road_type,id,serial_number,session_id,date_start,date_end,start_time,end_time
 131,66,MA200-0420,57,2023-05-12,2023-05-12,09:42:00,09:52:00,mobile_monitoring,non_main_road
 132,66,MA200-0420,57,2023-05-12,2023-05-12,09:52:30,10:01:30,mobile_monitoring,main_road
 133,67,MA200-0420,57,2023-05-12,2023-05-12,10:28:00,10:40:30,mobile_monitoring,non_main_road
-134,67,MA200-0420,57,2023-05-12,2023-05-12,10:41:00,10:43:00,mobile_monitoring,non_main_road
+134,67,MA200-0420,57,2023-05-12,2023-05-12,10:41:00,10:43:00,mobile_monitoring,main_road
 135,67,MA200-0420,57,2023-05-12,2023-05-12,10:43:30,10:49:00,mobile_monitoring,non_main_road
 136,68,MA200-0420,57,2023-05-12,2023-05-12,10:51:00,11:13:00,mobile_monitoring,non_main_road
 137,69,MA200-0420,57,2023-05-12,2023-05-12,13:54:00,13:56:00,mobile_monitoring,main_road

@@ -14,6 +14,7 @@ library(tibbletime)
 library(dplyr)
 library(anytime)
 library(smooth)
+library(openair)
 
 # read data ---------------------------------------------------------------
 
@@ -539,6 +540,38 @@ df_negative_count_cma <- df_negative_count
 # 6. df_collocation
 # 7. df_negative_count
 
+
+# meteorology -------------------------------------------------------------
+
+wind_df <- read_csv("data-raw/meteorology.csv") |>
+  rename(windspeed = "windspeed (m/s)",
+         winddirection = "winddirection (degrees)",
+         date_time = "timestamp") |>
+  mutate(date_time = dmy_hm(date_time))
+
+wind_df_time <- as_tbl_time(wind_df, index = date_time) |>
+  arrange(date_time)
+
+df_temp_met <- tibble()
+
+for(i in seq_along(unique(data_structure$id))){
+  test <- wind_df_time                         |>
+    filter_time(
+      data_structure$start_time[i]
+      ~ data_structure$end_time[i])
+
+  test <- test                       |>
+    mutate(
+      id = rep(
+        data_structure$id[i],nrow(test)))
+
+  df_temp_met <- df_temp_met                           |>
+    bind_rows(test)
+}
+
+df_met <- df_temp_met |>
+  left_join(data_structure, by = "id")
+
 # write data --------------------------------------------------------------
 
 usethis::use_data(df_aae_exp,
@@ -549,6 +582,7 @@ usethis::use_data(df_aae_exp,
                   df_sm,
                   df_collocation,
                   df_negative_count,
+                  df_met,
                   overwrite = TRUE)
 
 

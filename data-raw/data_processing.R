@@ -33,7 +33,6 @@ data_structure_mm_roads <- read_csv("data-raw/metadata/id-mobile-monitoring-road
 
 id_mm <- read_csv("data-raw/metadata/id-mobile-monitoring.csv")
 
-
 ### personal monitoring id's
 
 id_pm <- read_csv("data-raw/metadata/id-personal-monitoring.csv")
@@ -177,6 +176,12 @@ df <- df_0416 |>
   left_join(data_structure,
             by=c("id","session_id","serial_number"))
 
+df |>
+  select(exp_type, blue_babs, ir_babs) |>
+  mutate(diff = blue_babs - ir_babs) |>
+  group_by(exp_type) |>
+  summarise(neg = sum(diff < 0 )/n()*100)
+
 # data smoothing ----------------------------------------------------------
 
 ## count number of negative values in each experiment in raw data
@@ -185,6 +190,7 @@ df_negative_raw <- df |>
   group_by(exp_type) |>
   summarise(neg_irbcc = sum(ir_bcc < 0),
             neg_bluebcc = sum(blue_bcc < 0),
+            neg_uvbcc = sum(uv_bcc < 0),
             count = n())
 
 ### lot of negative values - smoothing needed
@@ -203,10 +209,13 @@ for (i in seq_along(unique(df_smooth_raw$id))) {
   list_df_raw[[i]] <- list_df_raw[[i]] |>
     mutate(ir_bcc_3 = smooth::cma(list_df_raw[[i]]$ir_bcc, order = 3, silent = TRUE)$fitted,
            blue_bcc_3 = smooth::cma(list_df_raw[[i]]$blue_bcc, order = 3, silent = TRUE)$fitted,
+           uv_bcc_3 = smooth::cma(list_df_raw[[i]]$uv_bcc, order = 3, silent = TRUE)$fitted,
            ir_bcc_5 = smooth::cma(list_df_raw[[i]]$ir_bcc, order = 5, silent = TRUE)$fitted,
            blue_bcc_5 = smooth::cma(list_df_raw[[i]]$blue_bcc, order = 5, silent = TRUE)$fitted,
+           uv_bcc_5 = smooth::cma(list_df_raw[[i]]$uv_bcc, order = 5, silent = TRUE)$fitted,
            ir_bcc_7 = smooth::cma(list_df_raw[[i]]$ir_bcc, order = 7, silent = TRUE)$fitted,
-           blue_bcc_7 = smooth::cma(list_df_raw[[i]]$blue_bcc, order = 7, silent = TRUE)$fitted)
+           blue_bcc_7 = smooth::cma(list_df_raw[[i]]$blue_bcc, order = 7, silent = TRUE)$fitted,
+           uv_bcc_7 = smooth::cma(list_df_raw[[i]]$uv_bcc, order = 7, silent = TRUE)$fitted)
 }
 
 df_smooth_temp <- bind_rows(list_df_raw)
@@ -217,12 +226,16 @@ df_negative_count <- df_smooth_temp |>
   group_by(exp_type) |>
   summarise(neg_irbcc = sum(ir_bcc < 0)/n()*100,
             neg_bluebcc = sum(blue_bcc < 0)/n()*100,
+            neg_uvbcc = sum(uv_bcc < 0)/n()*100,
             neg_irbcc_3 = sum(ir_bcc_3 < 0)/n()*100,
             neg_bluebcc_3 = sum(blue_bcc_3 < 0)/n()*100,
+            neg_uvbcc_3 = sum(uv_bcc_3 < 0)/n()*100,
             neg_irbcc_5 = sum(ir_bcc_5 < 0)/n()*100,
             neg_bluebcc_5 = sum(blue_bcc_5 < 0)/n()*100,
+            neg_uvbcc_5 = sum(uv_bcc_5 < 0)/n()*100,
             neg_irbcc_7 = sum(ir_bcc_7 < 0)/n()*100,
-            neg_bluebcc_7 = sum(blue_bcc_7 < 0)/n()*100)
+            neg_bluebcc_7 = sum(blue_bcc_7 < 0)/n()*100,
+            neg_uvbcc_7 = sum(uv_bcc_7 < 0)/n()*100)
 
 ### create a bar plot of the percentage of negative values
 ### number of negative values decreases with increase in the order
@@ -244,14 +257,28 @@ for (i in seq_along(unique(df_smooth$id))) {
     mutate(ir_bcc = smooth::cma(list_df[[i]]$ir_bcc, order = 5, silent = TRUE)$fitted,
            blue_bcc = smooth::cma(list_df[[i]]$blue_bcc, order = 5, silent = TRUE)$fitted,
            ir_babs = smooth::cma(list_df[[i]]$ir_babs, order = 5, silent = TRUE)$fitted,
-           blue_babs = smooth::cma(list_df[[i]]$blue_babs, order = 5, silent = TRUE)$fitted)
+           blue_babs = smooth::cma(list_df[[i]]$blue_babs, order = 5, silent = TRUE)$fitted,
+           uv_bcc = smooth::cma(list_df[[i]]$uv_bcc, order = 5, silent = TRUE)$fitted,
+           uv_babs = smooth::cma(list_df[[i]]$uv_babs, order = 5, silent = TRUE)$fitted)
 }
 
 ### add aae at each observation of smooth dataframe
 
 df_smooth <- bind_rows(list_df) |>
-  mutate(aae = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])))
+  mutate(aae = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5]))) |>
+  mutate(brc = uv_bcc - ir_bcc,
+         ebc_ff = ir_bcc*(1/(1-((1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^1))/(1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^2))))),
+         ebc_oc = ir_bcc*(1/(1-((1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^2))/(1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^1))))),
+         lac_oc = ((ir_babs - (uv_babs)*(parameters$wavelength[5]/parameters$wavelength[1])^(-1))/((parameters$wavelength[5]/parameters$wavelength[1])^(-2) - (parameters$wavelength[5]/parameters$wavelength[1])^(-1)))/parameters$MAC[1],
+         check = lac_oc - brc - ebc_oc,
+         ebc_ff_blue = ir_bcc*(1/(1-((1-(ir_babs/blue_babs)*((parameters$wavelength[5]/parameters$wavelength[2])^1))/(1-(ir_babs/blue_babs)*((parameters$wavelength[5]/parameters$wavelength[2])^2))))),
+         check_ff_uv_blue = ebc_ff/ebc_ff_blue)
 
+
+df_smooth |>
+  filter(exp_type %in% c("stationary_monitoring")) |>
+  ggplot() +
+  geom_point(aes(x = ebc_ff, y = ebc_ff_blue))
 
 ### select the mobile monitoring roads data
 
@@ -344,6 +371,8 @@ df_mm_road_type <- df_mm_0416 |>
 
 # calculate aae -----------------------------------------------------------
 
+# use blue and ir wavelength
+
 ## the aae is calculated with and without background correction
 
 ## correct bc abs data for background absorption
@@ -367,7 +396,13 @@ df_aae_raw <- df_smooth |>
          ir_babs  > mean_irbabs,
          blue_babs  > mean_bluebabs) |>
   mutate(ir_babs_bg_corr  = ir_babs  - mean_irbabs,
-         blue_babs_bg_corr  = blue_babs - mean_bluebabs)
+         blue_babs_bg_corr  = blue_babs - mean_bluebabs) |>
+  group_by(id, emission_source, exp_type) |>
+  summarise(across(c(blue_babs, ir_babs, ir_babs_bg_corr, blue_babs_bg_corr), mean))|>
+  mutate(aae_wo_bg_corr = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])),
+         aae_bg_corr = -log(blue_babs_bg_corr/ir_babs_bg_corr)/log((parameters$wavelength[2])/(parameters$wavelength[5])))|>
+  select(-blue_babs, -ir_babs, -ir_babs_bg_corr, -blue_babs_bg_corr) |>
+  arrange(by = exp_type)
 
 ### calculate mean absorption of each experiment
 
@@ -376,22 +411,65 @@ df_aae_raw <- df_smooth |>
 data_structure_aae <- data_structure |>
   filter(exp_type %in% c("waste_burning", "cooking", "vehicles"))
 
-## calculate aae of each experiment
-
-aae <- df_aae_raw |>
+# calculate aae with raw data
+aae <- df_smooth |>
+  filter(exp_type %in% c("waste_burning", "cooking", "vehicles")) |>
   group_by(id, emission_source, exp_type) |>
-  summarise(across(c(blue_babs, ir_babs, ir_babs_bg_corr, blue_babs_bg_corr), mean))|>
-  mutate(aae_wo_bg_corr = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])),
-         aae_bg_corr = -log(blue_babs_bg_corr/ir_babs_bg_corr)/log((parameters$wavelength[2])/(parameters$wavelength[5])))|>
+  summarise(across(c(blue_babs, ir_babs), mean))|>
+  mutate(aae_raw_data = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])))|>
+  select(-blue_babs, -ir_babs) |>
+  arrange(by = exp_type) |>
+  merge(df_aae_raw)
+
+# use uv and ir wavelength
+
+## the aae is calculated with and without background correction
+
+## correct bc abs data for background absorption
+
+### calculate background absorption from stationary monitoring data
+
+df_backgr_uv_ir <- df_smooth |>
+  filter(exp_type == "stationary_monitoring") |>
+  summarise(mean_ir = mean(ir_babs),
+            mean_uv = mean(uv_babs))
+
+### extract mean bc abs values at uv and IR wavelengths
+
+mean_irbabs = df_backgr_uv_ir$mean_ir
+mean_uvbabs = df_backgr_uv_ir$mean_uv
+
+### calculate bc abs by removing the background
+
+df_aae_raw_uv_ir <- df_smooth |>
+  filter(exp_type %in% c("waste_burning", "cooking", "vehicles"),
+         ir_babs  > mean_irbabs,
+         uv_babs  > mean_uvbabs) |>
+  mutate(ir_babs_bg_corr  = ir_babs  - mean_irbabs,
+         uv_babs_bg_corr  = uv_babs - mean_uvbabs) |>
+  group_by(id, emission_source, exp_type) |>
+  summarise(across(c(uv_babs, ir_babs, ir_babs_bg_corr, uv_babs_bg_corr), mean))|>
+  mutate(aae_wo_bg_corr = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5])),
+         aae_bg_corr = -log(uv_babs_bg_corr/ir_babs_bg_corr)/log((parameters$wavelength[1])/(parameters$wavelength[5])))|>
+  select(-uv_babs, -ir_babs, -ir_babs_bg_corr, -uv_babs_bg_corr) |>
   arrange(by = exp_type)
 
-aae_summary <- aae |>
-  group_by(emission_source) |>
-  summarise(mean_aae_wo_bg_corr = mean(aae_wo_bg_corr),
-            sd_aae_wo_bg_corr = sd(aae_wo_bg_corr),
-            mean_aae_bg_corr = mean(aae_bg_corr),
-            sd_aae_bg_corr = sd(aae_bg_corr),
-            count = n())
+### calculate mean absorption of each experiment
+
+#### select the aae experiments from data structure
+
+data_structure_aae <- data_structure |>
+  filter(exp_type %in% c("waste_burning", "cooking", "vehicles"))
+
+# calculate aae with raw data
+aae_uv_ir <- df_smooth |>
+  filter(exp_type %in% c("waste_burning", "cooking", "vehicles")) |>
+  group_by(id, emission_source, exp_type) |>
+  summarise(across(c(uv_babs, ir_babs), mean))|>
+  mutate(aae_raw_data = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5])))|>
+  select(-uv_babs, -ir_babs) |>
+  arrange(by = exp_type) |>
+  merge(df_aae_raw)
 
 # bc from bb and ff calculation ------------------------------------------
 
@@ -402,33 +480,32 @@ aae_summary <- aae |>
 #### we selected diesel vehicles as they were pure ff
 #### however, the plastics that we used, have wrappers around
 
-aae_ff <- aae_summary |>
-  filter(emission_source == "Diesel pickup-truck") |>
-  select(mean_aae_bg_corr)
-
-### aae from biomass burning (bb)
-
-#### we selected garden waste as they were pure biomass
-#### however, the wood experiments were done where people cook
-#### and may contain contamination. also, the cardboard that
-#### we burnt, contains plastic films, and cannot represent pure
-#### biomass
-
-aae_bb <- aae_summary |>
-  filter(emission_source == "Garden waste") |>
-  select(mean_aae_bg_corr)
+# aae_ff <- aae_bg |>
+#   filter(emission_source == "Diesel pickup-truck") |>
+#   select(mean_aae_bg_corr)
+#
+# ### aae from biomass burning (bb)
+#
+# #### we selected garden waste as they were pure biomass
+# #### however, the wood experiments were done where people cook
+# #### and may contain contamination. also, the cardboard that
+# #### we burnt, contains plastic films, and cannot represent pure
+# #### biomass
+#
+# aae_bb <- aae_bg |>
+#   filter(emission_source == "Garden waste") |>
+#   select(mean_aae_bg_corr)
 
 ### calculate bc from ff and bb
 
-df_main <- df_smooth |>
-  mutate(bc_ff = ir_bcc*(1/(1-((1-(ir_babs/blue_babs)*((parameters$wavelength[5]/parameters$wavelength[2])^aae_ff$mean_aae_bg_corr))/(1-(ir_babs/blue_babs)*((parameters$wavelength[5]/parameters$wavelength[2])^aae_bb$mean_aae_bg_corr))))),
-         bc_ff = ifelse(bc_ff < 0, 0, bc_ff),
-         bc_bb = ir_bcc*(1/(1-((1-(ir_babs/blue_babs)*((parameters$wavelength[5]/parameters$wavelength[2])^aae_bb$mean_aae_bg_corr))/(1-(ir_babs/blue_babs)*((parameters$wavelength[5]/parameters$wavelength[2])^aae_ff$mean_aae_bg_corr))))),
-         bc_bb = ifelse(bc_bb < 0, 0, bc_bb),
-         bc_bb = ifelse(bc_ff == 0, ir_bcc, bc_bb),
-         bc_ff = ifelse(bc_bb == 0, ir_bcc, bc_ff),
-         ratio_check = (bc_ff + bc_bb)/ir_bcc,
-         bc_bb_percent = bc_bb/ir_bcc*100)
+df_main <- df_smooth
+
+df_main |>
+  group_by(exp_type) |>
+  summarise(ebc_ff = mean(ebc_ff),
+            ebc_oc = mean(ebc_oc),
+            lac_oc = mean(lac_oc),
+            brc = mean(brc))
 
 ## using k-means
 
@@ -522,8 +599,7 @@ df_sm <- df_main |>
 ### sensor collocation
 
 df_collocation <- df_main |>
-  filter(exp_type == "sensor_collocation") |>
-  left_join(id_sc, by = "id")
+  right_join(id_sc, by = "id")
 
 ### reduction in negative values after cma
 
@@ -543,7 +619,7 @@ df_negative_count_cma <- df_negative_count
 
 # meteorology -------------------------------------------------------------
 
-wind_df <- read_csv("data-raw/meteorology.csv") |>
+wind_df <- read_csv("data-raw/meteorology/meteorology.csv") |>
   rename(windspeed = "windspeed (m/s)",
          winddirection = "winddirection (degrees)",
          date_time = "timestamp") |>
@@ -560,12 +636,12 @@ for(i in seq_along(unique(data_structure$id))){
       data_structure$start_time[i]
       ~ data_structure$end_time[i])
 
-  test <- test                       |>
+  test <- test |>
     mutate(
       id = rep(
         data_structure$id[i],nrow(test)))
 
-  df_temp_met <- df_temp_met                           |>
+  df_temp_met <- df_temp_met |>
     bind_rows(test)
 }
 

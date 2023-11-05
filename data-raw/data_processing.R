@@ -95,9 +95,12 @@ raw_data_subset <- raw_data_all              |>
          red_babs = red_bcc*parameters$MAC[4],
          ir_babs = ir_bcc*parameters$MAC[5],
          date_time = ymd_hms(paste(date, time))) |>
-  mutate(day_type = ifelse(weekdays(date) %in% c("Saturday", "Sunday"), "weekend", "weekday")) |>
-  drop_na(lat, long, uv_babs,blue_babs,
-          green_babs,red_babs,ir_babs)
+  mutate(day_type = ifelse(weekdays(date) %in% c("Saturday", "Sunday"), "weekend", "weekday"))|>
+  # 56412 observations (the observations during the startup time of MA200 are NAs. Hence, they
+  # were removed)
+  drop_na(lat, long, uv_babs, blue_babs,
+          green_babs, red_babs, ir_babs)
+  # 55390 observations
 
 ## select data between different experiments time intervals
 
@@ -175,13 +178,6 @@ df <- df_0416 |>
   bind_rows(df_0420) |>
   left_join(data_structure,
             by=c("id","session_id","serial_number"))
-
-df |>
-  select(exp_type, blue_babs, ir_babs) |>
-  mutate(diff = blue_babs - ir_babs) |>
-  group_by(exp_type) |>
-  summarise(neg = sum(diff < 0 )/n()*100)
-
 # data smoothing ----------------------------------------------------------
 
 ## count number of negative values in each experiment in raw data
@@ -201,7 +197,7 @@ df_smooth_raw <- df
 
 list_df_raw <- list()
 
-for (i in seq_along(unique(df_smooth_raw$id))) {
+for(i in seq_along(unique(df_smooth_raw$id))){
 
   list_df_raw[[i]] <- df_smooth_raw |>
     filter(id == i)
@@ -216,7 +212,7 @@ for (i in seq_along(unique(df_smooth_raw$id))) {
            ir_bcc_7 = smooth::cma(list_df_raw[[i]]$ir_bcc, order = 7, silent = TRUE)$fitted,
            blue_bcc_7 = smooth::cma(list_df_raw[[i]]$blue_bcc, order = 7, silent = TRUE)$fitted,
            uv_bcc_7 = smooth::cma(list_df_raw[[i]]$uv_bcc, order = 7, silent = TRUE)$fitted)
-}
+  }
 
 df_smooth_temp <- bind_rows(list_df_raw)
 
@@ -262,6 +258,9 @@ for (i in seq_along(unique(df_smooth$id))) {
            uv_babs = smooth::cma(list_df[[i]]$uv_babs, order = 5, silent = TRUE)$fitted)
 }
 
+
+
+
 ### add aae at each observation of smooth dataframe
 
 df_smooth <- bind_rows(list_df) |>
@@ -270,15 +269,9 @@ df_smooth <- bind_rows(list_df) |>
          ebc_ff = ir_bcc*(1/(1-((1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^1))/(1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^2))))),
          ebc_oc = ir_bcc*(1/(1-((1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^2))/(1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^1))))),
          lac_oc = ((ir_babs - (uv_babs)*(parameters$wavelength[5]/parameters$wavelength[1])^(-1))/((parameters$wavelength[5]/parameters$wavelength[1])^(-2) - (parameters$wavelength[5]/parameters$wavelength[1])^(-1)))/parameters$MAC[1],
-         check = lac_oc - brc - ebc_oc,
-         ebc_ff_blue = ir_bcc*(1/(1-((1-(ir_babs/blue_babs)*((parameters$wavelength[5]/parameters$wavelength[2])^1))/(1-(ir_babs/blue_babs)*((parameters$wavelength[5]/parameters$wavelength[2])^2))))),
-         check_ff_uv_blue = ebc_ff/ebc_ff_blue)
+         check = lac_oc - brc - ebc_oc)
 
 
-df_smooth |>
-  filter(exp_type %in% c("stationary_monitoring")) |>
-  ggplot() +
-  geom_point(aes(x = ebc_ff, y = ebc_ff_blue))
 
 ### select the mobile monitoring roads data
 
@@ -471,95 +464,8 @@ aae_uv_ir <- df_smooth |>
   arrange(by = exp_type) |>
   merge(df_aae_raw)
 
-# bc from bb and ff calculation ------------------------------------------
-
-## using aethalometer model
-
-### aae from fossil fuel (ff)
-
-#### we selected diesel vehicles as they were pure ff
-#### however, the plastics that we used, have wrappers around
-
-# aae_ff <- aae_bg |>
-#   filter(emission_source == "Diesel pickup-truck") |>
-#   select(mean_aae_bg_corr)
-#
-# ### aae from biomass burning (bb)
-#
-# #### we selected garden waste as they were pure biomass
-# #### however, the wood experiments were done where people cook
-# #### and may contain contamination. also, the cardboard that
-# #### we burnt, contains plastic films, and cannot represent pure
-# #### biomass
-#
-# aae_bb <- aae_bg |>
-#   filter(emission_source == "Garden waste") |>
-#   select(mean_aae_bg_corr)
-
-### calculate bc from ff and bb
 
 df_main <- df_smooth
-
-df_main |>
-  group_by(exp_type) |>
-  summarise(ebc_ff = mean(ebc_ff),
-            ebc_oc = mean(ebc_oc),
-            lac_oc = mean(lac_oc),
-            brc = mean(brc))
-
-## using k-means
-
-#### three clusters of aae were created using mobile
-#### monitoring data. the three clusters should represent
-#### dominant ff, dominant bb, mix of both
-
-### prepare dataset to find clusters
-
-df_k_means <-  df_main |>
-  filter(exp_type == "mobile_monitoring") |>
-  filter_all(all_vars(!is.infinite(.))) |>
-  left_join(id_mm, by = "id") |>
-  mutate(aae = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5]))) |>
-  filter_all(all_vars(!is.infinite(.))) |>
-  filter(!time_of_day %in% "Morning") |>
-  select(aae) |>
-  drop_na()
-
-### perform k-means clustering
-
-k <- 3
-
-result <- kmeans(df_k_means$aae, centers = k)
-
-cluster_centers <- tapply(df_k_means$aae, result$cluster, mean)
-
-### calculate the range of each cluster ('aae' max - 'aae' min)
-
-cluster_ranges <- tapply(df_k_means$aae, result$cluster, function(cluster_aae) {
-  max_aae <- max(cluster_aae)
-  min_aae <- min(cluster_aae)
-  cluster_range <- cbind(max_aae, min_aae)
-  return(cluster_range)
-})
-
-unlist(cluster_ranges)
-
-## the clusters interpretation is - 25% of ff means ff dominating
-## and vice-versa
-# Create a new variable 'aae_range' based on 'aae'
-
-# data <- df_k_means %>%
-#   mutate(aae_range = case_when(
-#     aae >= 0 & aae <= 1.328 ~ "ff_dominant",
-#     aae > 1.328 & aae <= 1.759 ~ "mixed",
-#     aae > 1.759 ~ "bb_dominant"
-#   )) |>
-#   drop_na()  |>
-# group_by(settlement_id, aae_range)  |>
-#   summarize(observation_count = n(),
-#             bc_ff = mean(ir_bcc),
-#             bc_bb = mean(ir_bcc))
-
 
 # create processed data files ---------------------------------------------
 
@@ -575,7 +481,9 @@ aae_calculated <- aae
 
 df_mm <- df_main |>
   filter(exp_type == "mobile_monitoring") |>
-  left_join(id_mm, by = "id")
+  left_join(id_mm, by = "id") |>
+  filter(!lat %in% c(0, NA),
+         !long %in% c(0, NA))
 
 
 ### burning events during mm
@@ -584,7 +492,9 @@ df_mm <- df_main |>
 
 df_pm <- df_main |>
   filter(exp_type == "personal_monitoring") |>
-  left_join(id_pm, by = "id")
+  left_join(id_pm, by = "id") |>
+  filter(!lat %in% c(0, NA),
+         !long %in% c(0, NA))
 
 ### burning events during pm
 
@@ -600,6 +510,53 @@ df_sm <- df_main |>
 
 df_collocation <- df_main |>
   right_join(id_sc, by = "id")
+
+
+# distance covered during mm and pm ---------------------------------------
+
+df_monitoring <- df_mm_road_type |>
+  bind_rows(df_pm) |>
+  bind_rows(df_sm) |>
+  bind_rows(df_collocation) |>
+  filter(ir_bcc > 0,
+         uv_bcc > 0) |>
+  mutate(brc = uv_bcc - ir_bcc) |>
+  filter(brc > 0)
+
+df_mm_pm <- df_mm |>
+  bind_rows(df_pm)
+
+coords_df_mm <- list()
+df_filter_mm <- list()
+df_distance_mm <- list()
+
+for (i in unique(df_mm_pm$id)) {
+
+  coords_df_mm[[i]] <- df_mm_pm |>
+    filter(id == i) |>
+    select(id, lat, long) |>
+    rename(latitude = "lat",
+           longitude = "long")
+
+  df_filter_mm[[i]] <- df_mm_pm |>
+    filter(id == i)
+
+  df_distance_mm[[i]] <- df_filter_mm[[i]] |>
+    mutate(distance = c(0, distVincentySphere(coords_df_mm[[i]][-nrow(coords_df_mm[[i]]),], coords_df_mm[[i]][-1,])))
+
+}
+
+df_dist_mm_pm <- df_distance_mm |>
+  bind_rows() |>
+  select(id, distance, lat, long, settlement_id, exp_type) |>
+  filter(!id %in% c(1:8)) |>
+  group_by(id, exp_type, settlement_id) |>
+  summarise(sum = sum(distance))|>
+  group_by(exp_type, settlement_id) |>
+  summarise(mean = mean(sum/1000),
+            sd = sd(sum/1000)) |> View()
+
+## correct Kacheri data - erroneous values
 
 ### reduction in negative values after cma
 
@@ -652,13 +609,76 @@ df_met <- df_temp_met |>
 
 usethis::use_data(df_aae_exp,
                   aae_calculated,
+                  aae_uv_ir,
                   df_mm,
                   df_mm_road_type,
                   df_pm,
                   df_sm,
                   df_collocation,
+                  df_monitoring,
                   df_negative_count,
                   df_met,
                   overwrite = TRUE)
 
+## using k-means
 
+#### three clusters of aae were created using mobile
+#### monitoring data. the three clusters should represent
+#### dominant ff, dominant bb, mix of both
+
+### prepare dataset to find clusters
+
+# df_k_means <-  df_main |>
+#   filter(exp_type == "mobile_monitoring") |>
+#   filter_all(all_vars(!is.infinite(.))) |>
+#   left_join(id_mm, by = "id") |>
+#   mutate(aae = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5]))) |>
+#   filter_all(all_vars(!is.infinite(.))) |>
+#   filter(!time_of_day %in% "Morning") |>
+#   select(aae) |>
+#   drop_na()
+
+
+# df_k_means <- df_mm |>
+#   filter(!time_of_day %in% "Morning") |>
+#   bind_rows(df_pm) |>
+#   mutate(aae = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5]))) |>
+#   filter_all(all_vars(!is.infinite(.))) |>
+#   select(aae) |>
+#   drop_na()
+
+
+### perform k-means clustering
+
+# k <- 3
+#
+# result <- kmeans(df_k_means$aae, centers = k)
+#
+# cluster_centers <- tapply(df_k_means$aae, result$cluster, mean)
+#
+# ### calculate the range of each cluster ('aae' max - 'aae' min)
+#
+# cluster_ranges <- tapply(df_k_means$aae, result$cluster, function(cluster_aae) {
+#   max_aae <- max(cluster_aae)
+#   min_aae <- min(cluster_aae)
+#   cluster_range <- cbind(max_aae, min_aae)
+#   return(cluster_range)
+# })
+#
+# unlist(cluster_ranges)
+
+## the clusters interpretation is - 25% of ff means ff dominating
+## and vice-versa
+# Create a new variable 'aae_range' based on 'aae'
+
+# data <- df_k_means %>%
+#   mutate(aae_range = case_when(
+#     aae >= 0 & aae <= 1.328 ~ "ff_dominant",
+#     aae > 1.328 & aae <= 1.759 ~ "mixed",
+#     aae > 1.759 ~ "bb_dominant"
+#   )) |>
+#   drop_na()  |>
+# group_by(settlement_id, aae_range)  |>
+#   summarize(observation_count = n(),
+#             bc_ff = mean(ir_bcc),
+#             bc_bb = mean(ir_bcc))

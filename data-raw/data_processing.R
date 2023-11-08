@@ -15,6 +15,7 @@ library(dplyr)
 library(anytime)
 library(smooth)
 library(openair)
+library(geosphere)
 
 # read data ---------------------------------------------------------------
 
@@ -264,7 +265,8 @@ for (i in seq_along(unique(df_smooth$id))) {
 ### add aae at each observation of smooth dataframe
 
 df_smooth <- bind_rows(list_df) |>
-  mutate(aae = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5]))) |>
+  mutate(aae_uv_ir = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5])),
+         aae_blue_ir = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5]))) |>
   mutate(brc = uv_bcc - ir_bcc,
          ebc_ff = ir_bcc*(1/(1-((1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^1))/(1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^2))))),
          ebc_oc = ir_bcc*(1/(1-((1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^2))/(1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^1))))),
@@ -462,7 +464,7 @@ aae_uv_ir <- df_smooth |>
   mutate(aae_raw_data = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5])))|>
   select(-uv_babs, -ir_babs) |>
   arrange(by = exp_type) |>
-  merge(df_aae_raw)
+  merge(df_aae_raw_uv_ir)
 
 
 df_main <- df_smooth

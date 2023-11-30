@@ -273,6 +273,50 @@ df_smooth <- bind_rows(list_df) |>
          lac_oc = ((ir_babs - (uv_babs)*(parameters$wavelength[5]/parameters$wavelength[1])^(-1))/((parameters$wavelength[5]/parameters$wavelength[1])^(-2) - (parameters$wavelength[5]/parameters$wavelength[1])^(-1)))/parameters$MAC[1],
          check = lac_oc - brc - ebc_oc)
 
+# df_aae <- df_smooth |>
+#   filter(exp_type %in% c("waste_burning", "cooking", "vehicles")) |>
+#   select(id, emission_source, uv_babs, blue_babs, red_babs, green_babs, ir_babs) |>
+#   group_by(id, emission_source) |>
+#   summarise(uv_babs = mean(uv_babs),
+#             blue_babs = mean(blue_babs),
+#             red_babs = mean(red_babs),
+#             green_babs = mean(green_babs),
+#             ir_babs = mean(ir_babs)) |>
+#   mutate(UV = log(uv_babs),
+#          Blue = log(blue_babs),
+#          Green = log(green_babs),
+#          Red = log(red_babs),
+#          IR = log(ir_babs)) |>
+#   select(id, emission_source, UV, Blue, Green, Red, IR) |>
+#   pivot_longer(cols = c(UV, Blue, Green, Red, IR), names_to = "color", values_to = "ln_babs")
+#
+# df_parameters <- parameters |>
+#   mutate(ln_wavelength = log(wavelength)) |>
+#   select(ln_wavelength, color)
+#
+# df_aae_log <- df_aae |>
+#   left_join(df_parameters, by = "color") |>
+#   group_by(id, emission_source)
+#
+# library(moderndive)
+#
+# library(broom)
+# library(tibble)
+# library(ggplot2)
+# library(dplyr)
+# library(tidyr)
+# library(purrr)
+# log_aae |>
+#   group_by(id, emission_source) |>
+#   summarize(correlation = cor(ln_babs, ln_wavelength))
+#
+# group_by(id, emission_source) |>
+#   do(fitHour = lm(ln_babs ~ ln_wavelength, data = .))
+#
+# group_modify(~ broom::tidy(lm(ln_babs ~ ln_wavelength, data = .x)))
+#
+#
+# get_regression_table(log_aae)
 
 
 ### select the mobile monitoring roads data

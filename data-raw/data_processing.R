@@ -447,7 +447,11 @@ df_aae_raw <- df_smooth |>
 
 #### select the aae experiments from data structure
 
+
 data_structure_aae <- data_structure |>
+  filter(exp_type %in% c("waste_burning", "cooking", "vehicles"))
+
+df_aae <- df_smooth |>
   filter(exp_type %in% c("waste_burning", "cooking", "vehicles"))
 
 # calculate aae with raw data
@@ -654,6 +658,7 @@ df_met <- df_temp_met |>
 # write data --------------------------------------------------------------
 
 usethis::use_data(df_aae_exp,
+                  df_aae,
                   aae_calculated,
                   aae_uv_ir,
                   df_mm,

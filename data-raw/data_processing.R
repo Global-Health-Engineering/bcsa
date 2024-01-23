@@ -38,6 +38,8 @@ id_mm <- read_csv("data-raw/metadata/id-mobile-monitoring.csv")
 
 id_pm <- read_csv("data-raw/metadata/id-personal-monitoring.csv")
 
+id_pm_trips <- read_csv("data-raw/metadata/id-personal-monitoring-trips.csv")
+
 ### stationary monitoring id's
 
 id_sm <- read_csv("data-raw/metadata/id-stationary-monitoring.csv")
@@ -596,15 +598,17 @@ for (i in unique(df_mm_pm$id)) {
 
 }
 
-df_dist_mm_pm <- df_distance_mm |>
+df_dist_raw <- df_distance_mm |>
   bind_rows() |>
   select(id, distance, lat, long, settlement_id, exp_type) |>
   filter(!id %in% c(1:8)) |>
   group_by(id, exp_type, settlement_id) |>
-  summarise(sum = sum(distance))|>
+  summarise(sum = sum(distance))
+
+df_dist_mm_pm <- df_dist_raw |>
   group_by(exp_type, settlement_id) |>
   summarise(mean = mean(sum/1000),
-            sd = sd(sum/1000)) |> View()
+            sd = sd(sum/1000))
 
 ## correct Kacheri data - erroneous values
 
@@ -654,6 +658,30 @@ for(i in seq_along(unique(data_structure$id))){
 
 df_met <- df_temp_met |>
   left_join(data_structure, by = "id")
+
+
+# burning events ----------------------------------------------------------
+
+
+
+df_dist_pm <- df_dist_raw |>
+  filter(exp_type == "personal_monitoring")
+
+df_burning_events <- id_pm_trips |>
+  group_by(id, settlement_id) |>
+  summarise(burning_events = n()) |>
+  left_join(df_dist_pm, by = c("id", "settlement_id")) |>
+  mutate(fraction_burning = sum/burning_events) |>
+  group_by(settlement_id) |>
+  summarise(mean = mean(fraction_burning),
+            sd = sd(fraction_burning))
+
+ds <- data_structure |>
+  filter(exp_type == "personal_monitoring") |>
+  left_join(df_burning_events, by = c("id")) |>
+  mutate(events = as.numeric(end_time - start_time)/60) |>
+  mutate(percent_burning = burning_events/events*100)
+
 
 # write data --------------------------------------------------------------
 

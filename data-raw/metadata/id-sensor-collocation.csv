@@ -5,8 +5,12 @@ id,main_exp
 127,aae_2
 128,pre_stationary
 129,pre_stationary
-158,post_stationary
-159,post_stationary
+158,post_stationary_1
+159,post_stationary_1
+160,post_stationary_2
+161,post_stationary_2
+162,post_stationary_3
+163,post_stationary_3
 17,mobile_monitoring_1
 18,mobile_monitoring_1
 19,mobile_monitoring_1

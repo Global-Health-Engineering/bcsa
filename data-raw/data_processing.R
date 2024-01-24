@@ -101,8 +101,7 @@ raw_data_subset <- raw_data_all              |>
   mutate(day_type = ifelse(weekdays(date) %in% c("Saturday", "Sunday"), "weekend", "weekday"))|>
   # 56412 observations (the observations during the startup time of MA200 are NAs. Hence, they
   # were removed)
-  drop_na(lat, long, uv_babs, blue_babs,
-          green_babs, red_babs, ir_babs)
+  drop_na(uv_babs, blue_babs,ir_babs)
   # 55390 observations
 
 ## select data between different experiments time intervals
@@ -186,7 +185,7 @@ df <- df_0416 |>
 ## count number of negative values in each experiment in raw data
 
 df_negative_raw <- df |>
-  group_by(exp_type) |>
+  group_by(exp_type, emission_source) |>
   summarise(neg_irbcc = sum(ir_bcc < 0),
             neg_bluebcc = sum(blue_bcc < 0),
             neg_uvbcc = sum(uv_bcc < 0),
@@ -261,65 +260,11 @@ for (i in seq_along(unique(df_smooth$id))) {
            uv_babs = smooth::cma(list_df[[i]]$uv_babs, order = 5, silent = TRUE)$fitted)
 }
 
-
-
-
 ### add aae at each observation of smooth dataframe
 
 df_smooth <- bind_rows(list_df) |>
   mutate(aae_uv_ir = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5])),
-         aae_blue_ir = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5]))) |>
-  mutate(brc = uv_bcc - ir_bcc,
-         ebc_ff = ir_bcc*(1/(1-((1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^1))/(1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^2))))),
-         ebc_oc = ir_bcc*(1/(1-((1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^2))/(1-(ir_babs/uv_babs)*((parameters$wavelength[5]/parameters$wavelength[1])^1))))),
-         lac_oc = ((ir_babs - (uv_babs)*(parameters$wavelength[5]/parameters$wavelength[1])^(-1))/((parameters$wavelength[5]/parameters$wavelength[1])^(-2) - (parameters$wavelength[5]/parameters$wavelength[1])^(-1)))/parameters$MAC[1],
-         check = lac_oc - brc - ebc_oc)
-
-# df_aae <- df_smooth |>
-#   filter(exp_type %in% c("waste_burning", "cooking", "vehicles")) |>
-#   select(id, emission_source, uv_babs, blue_babs, red_babs, green_babs, ir_babs) |>
-#   group_by(id, emission_source) |>
-#   summarise(uv_babs = mean(uv_babs),
-#             blue_babs = mean(blue_babs),
-#             red_babs = mean(red_babs),
-#             green_babs = mean(green_babs),
-#             ir_babs = mean(ir_babs)) |>
-#   mutate(UV = log(uv_babs),
-#          Blue = log(blue_babs),
-#          Green = log(green_babs),
-#          Red = log(red_babs),
-#          IR = log(ir_babs)) |>
-#   select(id, emission_source, UV, Blue, Green, Red, IR) |>
-#   pivot_longer(cols = c(UV, Blue, Green, Red, IR), names_to = "color", values_to = "ln_babs")
-#
-# df_parameters <- parameters |>
-#   mutate(ln_wavelength = log(wavelength)) |>
-#   select(ln_wavelength, color)
-#
-# df_aae_log <- df_aae |>
-#   left_join(df_parameters, by = "color") |>
-#   group_by(id, emission_source)
-#
-# library(moderndive)
-#
-# library(broom)
-# library(tibble)
-# library(ggplot2)
-# library(dplyr)
-# library(tidyr)
-# library(purrr)
-# log_aae |>
-#   group_by(id, emission_source) |>
-#   summarize(correlation = cor(ln_babs, ln_wavelength))
-#
-# group_by(id, emission_source) |>
-#   do(fitHour = lm(ln_babs ~ ln_wavelength, data = .))
-#
-# group_modify(~ broom::tidy(lm(ln_babs ~ ln_wavelength, data = .x)))
-#
-#
-# get_regression_table(log_aae)
-
+         aae_blue_ir = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])))
 
 ### select the mobile monitoring roads data
 
@@ -392,29 +337,20 @@ for(i in seq_along(unique(data_structure_mm_0420$id_road_type))){
 
 df_mm_road_type <- df_mm_0416 |>
   bind_rows(df_mm_0420) |>
-  filter(!lat %in% 0,
-         !long %in% 0)|>
   left_join(id_mm,
             by=c("id")) |>
   left_join(data_structure_mm_roads,
-            by = c("id_road_type","id", "serial_number", "session_id", "date_start", "date_end","exp_type"))
-
-# p_aae <- df_mm_road_type |>
-#   filter(type_of_road == "non_main_road") |>
-#   ggplot(aes(x = settlement_id, y = ir_bcc)) +
-#   geom_boxplot(outlier.shape = NA) +
-#   geom_hline(yintercept = 1.55) +
-#   #scale_y_continuous(limits = quantile(df_mm_road_type$aae, c(0.01, 0.90))) +
-#   labs(y= "AAE values") +
-#   facet_wrap(~day_type)
-#
-# p_aae
+            by = c("id_road_type","id", "serial_number", "session_id", "date_start", "date_end","exp_type"))|>
+  #4041 observations - the zero values in lat long were removed
+  filter(!lat %in% 0,
+         !long %in% 0)
+  #4038 values (only 3 were removed)
 
 # calculate aae -----------------------------------------------------------
 
 # use blue and ir wavelength
 
-## the aae is calculated with and without background correction
+## the aae is calculated with and without background correction and raw data
 
 ## correct bc abs data for background absorption
 
@@ -448,7 +384,6 @@ df_aae_raw <- df_smooth |>
 ### calculate mean absorption of each experiment
 
 #### select the aae experiments from data structure
-
 
 data_structure_aae <- data_structure |>
   filter(exp_type %in% c("waste_burning", "cooking", "vehicles"))
@@ -516,7 +451,6 @@ aae_uv_ir <- df_smooth |>
   arrange(by = exp_type) |>
   merge(df_aae_raw_uv_ir)
 
-
 df_main <- df_smooth
 
 # create processed data files ---------------------------------------------
@@ -537,7 +471,6 @@ df_mm <- df_main |>
   filter(!lat %in% c(0, NA),
          !long %in% c(0, NA))
 
-
 ### burning events during mm
 
 ## personal monitoring (pm) data
@@ -547,8 +480,6 @@ df_pm <- df_main |>
   left_join(id_pm, by = "id") |>
   filter(!lat %in% c(0, NA),
          !long %in% c(0, NA))
-
-### burning events during pm
 
 ## stationary monitoring data
 
@@ -562,7 +493,6 @@ df_sm <- df_main |>
 
 df_collocation <- df_main |>
   right_join(id_sc, by = "id")
-
 
 # distance covered during mm and pm ---------------------------------------
 
@@ -662,8 +592,6 @@ df_met <- df_temp_met |>
 
 # burning events ----------------------------------------------------------
 
-
-
 df_dist_pm <- df_dist_raw |>
   filter(exp_type == "personal_monitoring")
 
@@ -676,11 +604,21 @@ df_burning_events <- id_pm_trips |>
   summarise(mean = mean(fraction_burning),
             sd = sd(fraction_burning))
 
-ds <- data_structure |>
+df <- data_structure |>
   filter(exp_type == "personal_monitoring") |>
-  left_join(df_burning_events, by = c("id")) |>
-  mutate(events = as.numeric(end_time - start_time)/60) |>
-  mutate(percent_burning = burning_events/events*100)
+  left_join(id_pm_trips, by = c("id")) |>
+  rename(date = date_start)
+
+ds <- df_monitoring |>
+  filter(exp_type == "personal_monitoring") |>
+  right_join(df, by = c("id", "settlement_id", "time", "date")) |>
+  group_by(id, settlement_id) |>
+  drop_na(ir_bcc, aae_blue_ir) |>
+  summarise(mean = mean(ir_bcc),
+            sd = sd(ir_bcc),
+            mean_aae = mean(aae_blue_ir),
+            sd_aae = sd(aae_blue_ir),
+            count = n())
 
 
 # write data --------------------------------------------------------------

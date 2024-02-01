@@ -99,10 +99,11 @@ raw_data_subset <- raw_data_all              |>
          ir_babs = ir_bcc*parameters$MAC[5],
          date_time = ymd_hms(paste(date, time))) |>
   mutate(day_type = ifelse(weekdays(date) %in% c("Saturday", "Sunday"), "weekend", "weekday"))|>
-  # 56412 observations (the observations during the startup time of MA200 are NAs. Hence, they
-  # were removed)
-  drop_na(uv_babs, blue_babs,ir_babs)
-  # 55390 observations
+  # 57745 observations
+  # the observations during the startup time of MA200 are NAs. Hence, they
+  # were removed
+  drop_na(uv_babs, blue_babs, ir_babs)
+  # 56668 observations
 
 ## select data between different experiments time intervals
 
@@ -343,8 +344,11 @@ df_mm_road_type <- df_mm_0416 |>
             by = c("id_road_type","id", "serial_number", "session_id", "date_start", "date_end","exp_type"))|>
   #4041 observations - the zero values in lat long were removed
   filter(!lat %in% 0,
-         !long %in% 0)
+         !long %in% 0) |>
   #4038 values (only 3 were removed)
+  #remove values during sensor collocation (remove 420 monitor - random)
+  filter(!id %in% c(17:24,65:72))
+  #3240 values
 
 # calculate aae -----------------------------------------------------------
 
@@ -469,17 +473,47 @@ df_mm <- df_main |>
   filter(exp_type == "mobile_monitoring") |>
   left_join(id_mm, by = "id") |>
   filter(!lat %in% c(0, NA),
-         !long %in% c(0, NA))
-
-### burning events during mm
+         !long %in% c(0, NA)) |>
+  filter(!id %in% c(17:24,65:72))
 
 ## personal monitoring (pm) data
 
-df_pm <- df_main |>
+df_pm_wo_kacheri <- df_main |>
   filter(exp_type == "personal_monitoring") |>
   left_join(id_pm, by = "id") |>
   filter(!lat %in% c(0, NA),
-         !long %in% c(0, NA))
+         !long %in% c(0, NA)) |>
+  filter(!settlement_id %in% "Kacheri")
+
+library(hms)
+
+df_pm <- df_main |>
+  filter(exp_type == "personal_monitoring") |>
+  filter(!time %in% parse_hms(c("14:24:30",
+                                "14:31:30",
+                                "14:32:00",
+                                "14:32:30",
+                                "14:33:00",
+                                "14:33:31",
+                                "14:34:00",
+                                "14:34:01",
+                                "14:34:30",
+                                "14:35:01",
+                                "14:35:30",
+                                "14:50:31",
+                                "14:51:00",
+                                "14:57:00",
+                                "14:57:30",
+                                "14:58:00")))|>
+  left_join(id_pm, by = "id") |>
+  filter(settlement_id == "Kacheri",
+         !lat %in% c(0, NA),
+         !long %in% c(0, NA)) |>
+  bind_rows(df_pm_wo_kacheri)
+
+df_pm_trips <- data_structure |>
+  filter(exp_type == "personal_monitoring") |>
+  left_join(id_pm_trips, by = c("id"))
 
 ## stationary monitoring data
 
@@ -494,57 +528,16 @@ df_sm <- df_main |>
 df_collocation <- df_main |>
   right_join(id_sc, by = "id")
 
-# distance covered during mm and pm ---------------------------------------
+### reduction in negative values after cma
 
+df_negative_count_cma <- df_negative_count
+
+## all monitoring data
 df_monitoring <- df_mm_road_type |>
   bind_rows(df_pm) |>
   bind_rows(df_sm) |>
   bind_rows(df_collocation) |>
-  filter(ir_bcc > 0,
-         uv_bcc > 0) |>
-  mutate(brc = uv_bcc - ir_bcc) |>
-  filter(brc > 0)
-
-df_mm_pm <- df_mm |>
-  bind_rows(df_pm)
-
-coords_df_mm <- list()
-df_filter_mm <- list()
-df_distance_mm <- list()
-
-for (i in unique(df_mm_pm$id)) {
-
-  coords_df_mm[[i]] <- df_mm_pm |>
-    filter(id == i) |>
-    select(id, lat, long) |>
-    rename(latitude = "lat",
-           longitude = "long")
-
-  df_filter_mm[[i]] <- df_mm_pm |>
-    filter(id == i)
-
-  df_distance_mm[[i]] <- df_filter_mm[[i]] |>
-    mutate(distance = c(0, distVincentySphere(coords_df_mm[[i]][-nrow(coords_df_mm[[i]]),], coords_df_mm[[i]][-1,])))
-
-}
-
-df_dist_raw <- df_distance_mm |>
-  bind_rows() |>
-  select(id, distance, lat, long, settlement_id, exp_type) |>
-  filter(!id %in% c(1:8)) |>
-  group_by(id, exp_type, settlement_id) |>
-  summarise(sum = sum(distance))
-
-df_dist_mm_pm <- df_dist_raw |>
-  group_by(exp_type, settlement_id) |>
-  summarise(mean = mean(sum/1000),
-            sd = sd(sum/1000))
-
-## correct Kacheri data - erroneous values
-
-### reduction in negative values after cma
-
-df_negative_count_cma <- df_negative_count
+  filter(ir_bcc > 0)
 
 ##### for Lars:
 ##### following files needs to created
@@ -589,38 +582,6 @@ for(i in seq_along(unique(data_structure$id))){
 df_met <- df_temp_met |>
   left_join(data_structure, by = "id")
 
-
-# burning events ----------------------------------------------------------
-
-df_dist_pm <- df_dist_raw |>
-  filter(exp_type == "personal_monitoring")
-
-df_burning_events <- id_pm_trips |>
-  group_by(id, settlement_id) |>
-  summarise(burning_events = n()) |>
-  left_join(df_dist_pm, by = c("id", "settlement_id")) |>
-  mutate(fraction_burning = sum/burning_events) |>
-  group_by(settlement_id) |>
-  summarise(mean = mean(fraction_burning),
-            sd = sd(fraction_burning))
-
-df <- data_structure |>
-  filter(exp_type == "personal_monitoring") |>
-  left_join(id_pm_trips, by = c("id")) |>
-  rename(date = date_start)
-
-ds <- df_monitoring |>
-  filter(exp_type == "personal_monitoring") |>
-  right_join(df, by = c("id", "settlement_id", "time", "date")) |>
-  group_by(id, settlement_id) |>
-  drop_na(ir_bcc, aae_blue_ir) |>
-  summarise(mean = mean(ir_bcc),
-            sd = sd(ir_bcc),
-            mean_aae = mean(aae_blue_ir),
-            sd_aae = sd(aae_blue_ir),
-            count = n())
-
-
 # write data --------------------------------------------------------------
 
 usethis::use_data(df_aae_exp,
@@ -635,6 +596,7 @@ usethis::use_data(df_aae_exp,
                   df_monitoring,
                   df_negative_count,
                   df_met,
+                  df_pm_trips,
                   overwrite = TRUE)
 
 ## using k-means

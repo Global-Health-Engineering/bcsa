@@ -224,17 +224,13 @@ df_smooth_temp <- bind_rows(list_df_raw)
 df_negative_count <- df_smooth_temp |>
   group_by(exp_type) |>
   summarise(neg_irbcc = sum(ir_bcc < 0)/n()*100,
-            neg_bluebcc = sum(blue_bcc < 0)/n()*100,
-            neg_uvbcc = sum(uv_bcc < 0)/n()*100,
             neg_irbcc_3 = sum(ir_bcc_3 < 0)/n()*100,
-            neg_bluebcc_3 = sum(blue_bcc_3 < 0)/n()*100,
-            neg_uvbcc_3 = sum(uv_bcc_3 < 0)/n()*100,
             neg_irbcc_5 = sum(ir_bcc_5 < 0)/n()*100,
-            neg_bluebcc_5 = sum(blue_bcc_5 < 0)/n()*100,
-            neg_uvbcc_5 = sum(uv_bcc_5 < 0)/n()*100,
-            neg_irbcc_7 = sum(ir_bcc_7 < 0)/n()*100,
-            neg_bluebcc_7 = sum(blue_bcc_7 < 0)/n()*100,
-            neg_uvbcc_7 = sum(uv_bcc_7 < 0)/n()*100)
+            neg_irbcc_7 = sum(ir_bcc_7 < 0)/n()*100) |>
+  mutate_if(is.numeric,
+            round,
+            digits = 1) |>
+  drop_na()
 
 ### create a bar plot of the percentage of negative values
 ### number of negative values decreases with increase in the order
@@ -519,7 +515,8 @@ df_pm_trips <- data_structure |>
 
 df_sm <- df_main |>
   filter(exp_type == "stationary_monitoring") |>
-  left_join(id_sm, by = "serial_number")
+  left_join(id_sm, by = "serial_number") |>
+  drop_na(ir_bcc, aae_blue_ir)
 
 ## data quality check
 
@@ -588,7 +585,6 @@ usethis::use_data(df_aae_exp,
                   df_aae,
                   aae_calculated,
                   aae_uv_ir,
-                  df_mm,
                   df_mm_road_type,
                   df_pm,
                   df_sm,

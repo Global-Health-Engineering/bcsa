@@ -16,6 +16,8 @@ library(anytime)
 library(smooth)
 library(openair)
 library(geosphere)
+library(sf)
+library(tmap)
 
 # read data ---------------------------------------------------------------
 
@@ -29,6 +31,8 @@ parameters <- read_csv("data-raw/metadata/MA200-parameters.csv")
 data_structure <- read_csv("data-raw/metadata/data-structure.csv")
 
 data_structure_mm_roads <- read_csv("data-raw/metadata/id-mobile-monitoring-roads.csv")
+
+data_structure_mm_roads_morning <- read_csv("data-raw/metadata/id-mobile-monitoring-roads-morning.csv")
 
 ### mobile monitoring id's
 
@@ -586,6 +590,7 @@ usethis::use_data(df_aae_exp,
                   aae_calculated,
                   aae_uv_ir,
                   df_mm_road_type,
+                  df_mm,
                   df_pm,
                   df_sm,
                   df_collocation,
@@ -594,6 +599,61 @@ usethis::use_data(df_aae_exp,
                   df_met,
                   df_pm_trips,
                   overwrite = TRUE)
+
+df_mm_map <- bcsa::df_pm |>
+  #bind_rows(df_pm) |>
+  drop_na("aae_blue_ir") |>
+  filter(settlement_id %in% c("Ndirande"),
+         id == 90)
+
+df_mm_map |>
+  summarise(min_aae = min(aae_blue_ir),
+            max_aae = max(aae_blue_ir))
+
+
+library(tidyverse)
+library(lubridate)
+library(hms)
+
+lat_mzedi <- -15.780930
+long_mzedi <- 35.094042
+
+df_mzedi <- data.frame(cbind(lat_mzedi, long_mzedi))
+df_mzedi_map <- st_as_sf(df_mzedi, coords = c("long_mzedi", "lat_mzedi"))
+
+map_data_sf <- st_as_sf(df_mm_map, coords = c("long", "lat"))
+
+
+library(RColorBrewer) # https://colorbrewer2.org/#type=sequential&scheme=PuBu&n=9
+tmap_mode("view")
+
+#color_palette <- alpha(colorRampPalette(c("black", "brown"))(12), alpha = 0.5)
+
+colors_manual <- c('black', '#012B40', '#023858', '#045a8d', '#0570b0', '#3690c0', '#74a9cf', '#a6bddb', '#d0d1e6', '#ece7f2', '#fff7fb', 'brown')
+
+colors_manual <- c('black',  '#3690c0', "brown")
+#
+aae_map <- tm_shape(map_data_sf) +
+  tm_basemap(server = "OpenStreetMap") +
+  tm_dots(col = "aae_blue_ir",
+          size = 0.1,
+          alpha = 1.5,
+          #border.col = "aae_blue_ir",
+          breaks = c(0.79, 1.29, 1.63, 2.15),
+          palette = colors_manual,
+          title = "AAE (475/880nm)") +
+  tm_facets(by = "id", nrow = 2, free.coords = FALSE)
+#tm_shape(df_mzedi_map) +
+#tm_basemap(server = "OpenStreetMap") +
+#tm_dots(col = "black",
+# size = 1,
+# alpha = 1)
+
+aae_map
+
+
+df_mm |>
+  filter(id %in% c(1:8))
 
 ## using k-means
 

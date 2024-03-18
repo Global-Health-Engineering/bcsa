@@ -595,6 +595,31 @@ usethis::use_data(df_aae_exp,
                   df_pm_trips,
                   overwrite = TRUE)
 
+
+# write dictionary --------------------------------------------------------
+
+source(here::here("data-raw/package_processing.R"))
+
+file_names <- list.files("data")
+
+dictionary <- get_variable_info(data = list(df_aae_exp,
+                                            df_aae,
+                                            aae_calculated,
+                                            aae_uv_ir,
+                                            df_mm_road_type,
+                                            df_pm, df_sm,
+                                            df_collocation,
+                                            df_monitoring,
+                                            df_negative_count, df_met,
+                                            df_pm_trips),
+                                directory = rep("data/", length(file_names)),
+                                file_name = file_names)
+dictionary |>
+  write_csv("data-raw/dictionary.csv")
+
+dictionary |>
+  openxlsx::write.xlsx("data-raw/dictionary.xlsx")
+
 ## using k-means
 
 #### three clusters of aae were created using mobile

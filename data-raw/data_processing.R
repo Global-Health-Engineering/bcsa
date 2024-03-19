@@ -1,7 +1,20 @@
 
 # description -------------------------------------------------------------
 
-# r script to process uploaded raw data into a tidy dataframe
+# r script to process uploaded raw black carbon data
+# and combine it with metadata to create tidy data sets
+
+# this includes the following steps:
+
+# 1. importing the raw data and metadata
+# 2. merging the raw data
+# 3. creating tidy data sets of each experiment
+# 4. exporting the tidy data sets
+
+# note that the tidy datasets consist of
+# raw data in a tidy form, and not the smoothed data.
+# this allows the user of the data to apply their own
+# smoothing methods.
 
 # r packages --------------------------------------------------------------
 
@@ -13,46 +26,55 @@ library(here)
 library(tibbletime)
 library(dplyr)
 library(anytime)
-library(smooth)
-library(openair)
-library(geosphere)
-library(sf)
-library(tmap)
+# library(smooth)
+library(hms)
 
-# read data ---------------------------------------------------------------
+# importing data ---------------------------------------------------------------
 
 ## ma200 parameters
+
 parameters <- read_csv("data-raw/metadata/MA200-parameters.csv")
 
 ## metadata
 
-### complete data structure
+### data structure (to define the start and end time of each experiment,
+### the serial number of the MA200, and the type of the experiment)
+
+#### complete data structure (including all the experiments)
 
 data_structure <- read_csv("data-raw/metadata/data-structure.csv")
 
+#### data structure for mobile monitoring separating highways from remote roads
+
 data_structure_mm_roads <- read_csv("data-raw/metadata/id-mobile-monitoring-roads.csv")
 
-data_structure_mm_roads_morning <- read_csv("data-raw/metadata/id-mobile-monitoring-roads-morning.csv")
+### id's (details of each experiment)
 
-### mobile monitoring id's
+#### mobile monitoring id's
+#### (location where the monitoring was done, the person who did the monitoring)
 
 id_mm <- read_csv("data-raw/metadata/id-mobile-monitoring.csv")
 
-### personal monitoring id's
+#### personal monitoring id's
+#### (location where the monitoring was done, the person who did the monitoring)
 
 id_pm <- read_csv("data-raw/metadata/id-personal-monitoring.csv")
 
+#### information of the times at which open waste burning was observed during personal monitoring
+
 id_pm_trips <- read_csv("data-raw/metadata/id-personal-monitoring-trips.csv")
 
-### stationary monitoring id's
+#### stationary monitoring id's (location where the monitoring was done)
 
 id_sm <- read_csv("data-raw/metadata/id-stationary-monitoring.csv")
 
-### sensor collocation id's
+#### sensor collocation id's
+#### (information on the experiment phase during which the sensors were collocated)
 
 id_sc <- read_csv("data-raw/metadata/id-sensor-collocation.csv")
 
-## bc monitoring raw data
+## raw data from the two ma200 monitors
+
 raw_data <- dir_ls("data-raw/")
 
 raw_data_files <- list.files("data-raw/")
@@ -63,7 +85,7 @@ raw_data_csv_paths <- path(here::here(raw_data_csv))
 
 raw_data_list <- list()
 
-# tidy data ---------------------------------------------------------------
+# merging data ---------------------------------------------------------------
 
 ## combine all the raw ma200 data in one dataset
 
@@ -84,7 +106,9 @@ raw_data_subset <- raw_data_all              |>
          "Time local (hh:mm:ss)",
          "GPS lat (ddmm.mmmmm)",
          "GPS long (dddmm.mmmmm)",
-         ends_with(" BCc"))                  |>
+         "UV BCc",
+         "Blue BCc",
+         "IR BCc")                  |>
   rename(serial_number = "Serial number",
          session_id = "Session ID",
          date = "Date local (yyyy/MM/dd)",
@@ -93,13 +117,9 @@ raw_data_subset <- raw_data_all              |>
          long = "GPS long (dddmm.mmmmm)",
          uv_bcc = "UV BCc",
          blue_bcc = "Blue BCc",
-         green_bcc = "Green BCc",
-         red_bcc = "Red BCc",
          ir_bcc = "IR BCc") |>
   mutate(uv_babs = uv_bcc*parameters$MAC[1],
          blue_babs = blue_bcc*parameters$MAC[2],
-         green_babs = green_bcc*parameters$MAC[3],
-         red_babs = red_bcc*parameters$MAC[4],
          ir_babs = ir_bcc*parameters$MAC[5],
          date_time = ymd_hms(paste(date, time))) |>
   mutate(day_type = ifelse(weekdays(date) %in% c("Saturday", "Sunday"), "weekend", "weekday"))|>
@@ -113,7 +133,7 @@ raw_data_subset <- raw_data_all              |>
 
 ### prepare the raw data to be used with filter_time function
 
-FB <- as_tbl_time(raw_data_subset, index = date_time)
+raw_data_time <- as_tbl_time(raw_data_subset, index = date_time)
 
 ### prepare the data structure to be used with filter_time function
 
@@ -129,11 +149,11 @@ data_structure <- data_structure |>
 df_0416 <- tibble()
 df_0420 <- tibble()
 
-FB_0416 <- FB |>
+raw_data_time_0416 <- raw_data_time |>
   filter(serial_number == "MA200-0416") |>
   arrange(date_time)
 
-FB_0420 <- FB                            |>
+raw_data_time_0420 <- raw_data_time                            |>
   filter(serial_number == "MA200-0420")  |>
   arrange(date_time)
 
@@ -149,7 +169,7 @@ data_structure_0420 <- data_structure    |>
 
 for(i in seq_along(unique(data_structure_0416$id)))
 {
-  test_0416 <- FB_0416                         |>
+  test_0416 <- raw_data_time_0416                         |>
     filter_time(
       data_structure_0416$start_time[i]
       ~ data_structure_0416$end_time[i])
@@ -165,7 +185,7 @@ for(i in seq_along(unique(data_structure_0416$id)))
 
 for(i in seq_along(unique(data_structure_0420$id)))
 {
-  test_0420 <- FB_0420                         |>
+  test_0420 <- raw_data_time_0420                         |>
     filter_time(
       data_structure_0420$start_time[i]
       ~ data_structure_0420$end_time[i])
@@ -181,91 +201,10 @@ for(i in seq_along(unique(data_structure_0420$id)))
 
 ### combine the data of 0416 and 0420
 
-df <- df_0416 |>
+df_all_raw <- df_0416 |>
   bind_rows(df_0420) |>
   left_join(data_structure,
             by=c("id","session_id","serial_number"))
-# data smoothing ----------------------------------------------------------
-
-## count number of negative values in each experiment in raw data
-
-df_negative_raw <- df |>
-  group_by(exp_type, emission_source) |>
-  summarise(neg_irbcc = sum(ir_bcc < 0),
-            neg_bluebcc = sum(blue_bcc < 0),
-            neg_uvbcc = sum(uv_bcc < 0),
-            count = n())
-
-### lot of negative values - smoothing needed
-
-## apply cma of order 3, 5 and 7 and create a temporary dataset
-
-df_smooth_raw <- df
-
-list_df_raw <- list()
-
-for(i in seq_along(unique(df_smooth_raw$id))){
-
-  list_df_raw[[i]] <- df_smooth_raw |>
-    filter(id == i)
-
-  list_df_raw[[i]] <- list_df_raw[[i]] |>
-    mutate(ir_bcc_3 = smooth::cma(list_df_raw[[i]]$ir_bcc, order = 3, silent = TRUE)$fitted,
-           blue_bcc_3 = smooth::cma(list_df_raw[[i]]$blue_bcc, order = 3, silent = TRUE)$fitted,
-           uv_bcc_3 = smooth::cma(list_df_raw[[i]]$uv_bcc, order = 3, silent = TRUE)$fitted,
-           ir_bcc_5 = smooth::cma(list_df_raw[[i]]$ir_bcc, order = 5, silent = TRUE)$fitted,
-           blue_bcc_5 = smooth::cma(list_df_raw[[i]]$blue_bcc, order = 5, silent = TRUE)$fitted,
-           uv_bcc_5 = smooth::cma(list_df_raw[[i]]$uv_bcc, order = 5, silent = TRUE)$fitted,
-           ir_bcc_7 = smooth::cma(list_df_raw[[i]]$ir_bcc, order = 7, silent = TRUE)$fitted,
-           blue_bcc_7 = smooth::cma(list_df_raw[[i]]$blue_bcc, order = 7, silent = TRUE)$fitted,
-           uv_bcc_7 = smooth::cma(list_df_raw[[i]]$uv_bcc, order = 7, silent = TRUE)$fitted)
-  }
-
-df_smooth_temp <- bind_rows(list_df_raw)
-
-## count number of negative values after smoothing
-
-df_negative_count <- df_smooth_temp |>
-  group_by(exp_type) |>
-  summarise(neg_irbcc = sum(ir_bcc < 0)/n()*100,
-            neg_irbcc_3 = sum(ir_bcc_3 < 0)/n()*100,
-            neg_irbcc_5 = sum(ir_bcc_5 < 0)/n()*100,
-            neg_irbcc_7 = sum(ir_bcc_7 < 0)/n()*100) |>
-  mutate_if(is.numeric,
-            round,
-            digits = 1) |>
-  drop_na()
-
-### create a bar plot of the percentage of negative values
-### number of negative values decreases with increase in the order
-### of smoothing. we select the order of 5, as the decrease in the
-### number of negative values between order 5 and 7 is not more than 1%
-
-## smooth df with selected cma order (now 5)
-
-df_smooth <- df
-
-list_df <- list()
-
-for (i in seq_along(unique(df_smooth$id))) {
-
-  list_df[[i]] <- df_smooth |>
-    filter(id == i)
-
-  list_df[[i]] <- list_df[[i]] |>
-    mutate(ir_bcc = smooth::cma(list_df[[i]]$ir_bcc, order = 5, silent = TRUE)$fitted,
-           blue_bcc = smooth::cma(list_df[[i]]$blue_bcc, order = 5, silent = TRUE)$fitted,
-           ir_babs = smooth::cma(list_df[[i]]$ir_babs, order = 5, silent = TRUE)$fitted,
-           blue_babs = smooth::cma(list_df[[i]]$blue_babs, order = 5, silent = TRUE)$fitted,
-           uv_bcc = smooth::cma(list_df[[i]]$uv_bcc, order = 5, silent = TRUE)$fitted,
-           uv_babs = smooth::cma(list_df[[i]]$uv_babs, order = 5, silent = TRUE)$fitted)
-}
-
-### add aae at each observation of smooth dataframe
-
-df_smooth <- bind_rows(list_df) |>
-  mutate(aae_uv_ir = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5])),
-         aae_blue_ir = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])))
 
 ### select the mobile monitoring roads data
 
@@ -278,19 +217,19 @@ data_structure_mm_roads <- data_structure_mm_roads |>
 
 ### divide the data of 0416 and 0420 monitors
 
-df_smooth_exc <- df_smooth |>
+df_all_raw_exc <- df_all_raw |>
   select(- start_time, -end_time)
 
-df_smooth_time <- as_tbl_time(df_smooth_exc, index = date_time)
+df_all_raw_time <- as_tbl_time(df_all_raw_exc, index = date_time)
 
 df_mm_0416 <- tibble()
 df_mm_0420 <- tibble()
 
-FB_mm_0416 <- df_smooth_time |>
+raw_data_time_mm_0416 <- df_all_raw_time |>
   filter(serial_number == "MA200-0416") |>
   arrange(date_time)
 
-FB_mm_0420 <- df_smooth_time  |>
+raw_data_time_mm_0420 <- df_all_raw_time  |>
   filter(serial_number == "MA200-0420")  |>
   arrange(date_time)
 
@@ -305,7 +244,7 @@ data_structure_mm_0420 <- data_structure_mm_roads    |>
 ### select data between experiments time intervals
 
 for(i in seq_along(unique(data_structure_mm_0416$id_road_type))){
-  test_0416 <- FB_mm_0416                         |>
+  test_0416 <- raw_data_time_mm_0416                         |>
     filter_time(
       data_structure_mm_0416$start_time[i]
       ~ data_structure_mm_0416$end_time[i])
@@ -320,7 +259,7 @@ for(i in seq_along(unique(data_structure_mm_0416$id_road_type))){
 }
 
 for(i in seq_along(unique(data_structure_mm_0420$id_road_type))){
-  test_0420 <- FB_mm_0420                         |>
+  test_0420 <- raw_data_time_mm_0420                         |>
     filter_time(
       data_structure_mm_0420$start_time[i]
       ~ data_structure_mm_0420$end_time[i])
@@ -350,144 +289,38 @@ df_mm_road_type <- df_mm_0416 |>
   filter(!id %in% c(17:24,65:72))
   #3240 values
 
-# calculate aae -----------------------------------------------------------
-
-# use blue and ir wavelength
-
-## the aae is calculated with and without background correction and raw data
-
-## correct bc abs data for background absorption
-
-### calculate background absorption from stationary monitoring data
-
-df_backgr <- df_smooth |>
-  filter(exp_type == "stationary_monitoring") |>
-  summarise(mean_ir = mean(ir_babs),
-            mean_blue = mean(blue_babs))
-
-### extract mean bc abs values at blue and IR wavelengths
-
-mean_irbabs = df_backgr$mean_ir
-mean_bluebabs = df_backgr$mean_blue
-
-### calculate bc abs by removing the background
-
-df_aae_raw <- df_smooth |>
-  filter(exp_type %in% c("waste_burning", "cooking", "vehicles"),
-         ir_babs  > mean_irbabs,
-         blue_babs  > mean_bluebabs) |>
-  mutate(ir_babs_bg_corr  = ir_babs  - mean_irbabs,
-         blue_babs_bg_corr  = blue_babs - mean_bluebabs) |>
-  group_by(id, emission_source, exp_type) |>
-  summarise(across(c(blue_babs, ir_babs, ir_babs_bg_corr, blue_babs_bg_corr), mean))|>
-  mutate(aae_wo_bg_corr = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])),
-         aae_bg_corr = -log(blue_babs_bg_corr/ir_babs_bg_corr)/log((parameters$wavelength[2])/(parameters$wavelength[5])))|>
-  select(-blue_babs, -ir_babs, -ir_babs_bg_corr, -blue_babs_bg_corr) |>
-  arrange(by = exp_type)
-
-### calculate mean absorption of each experiment
-
-#### select the aae experiments from data structure
-
-data_structure_aae <- data_structure |>
-  filter(exp_type %in% c("waste_burning", "cooking", "vehicles"))
-
-df_aae <- df_smooth |>
-  filter(exp_type %in% c("waste_burning", "cooking", "vehicles"))
-
-# calculate aae with raw data
-aae <- df_smooth |>
-  filter(exp_type %in% c("waste_burning", "cooking", "vehicles")) |>
-  group_by(id, emission_source, exp_type) |>
-  summarise(across(c(blue_babs, ir_babs), mean))|>
-  mutate(aae_raw_data = -log(blue_babs/ir_babs)/log((parameters$wavelength[2])/(parameters$wavelength[5])))|>
-  select(-blue_babs, -ir_babs) |>
-  arrange(by = exp_type) |>
-  merge(df_aae_raw)
-
-# use uv and ir wavelength
-
-## the aae is calculated with and without background correction
-
-## correct bc abs data for background absorption
-
-### calculate background absorption from stationary monitoring data
-
-df_backgr_uv_ir <- df_smooth |>
-  filter(exp_type == "stationary_monitoring") |>
-  summarise(mean_ir = mean(ir_babs),
-            mean_uv = mean(uv_babs))
-
-### extract mean bc abs values at uv and IR wavelengths
-
-mean_irbabs = df_backgr_uv_ir$mean_ir
-mean_uvbabs = df_backgr_uv_ir$mean_uv
-
-### calculate bc abs by removing the background
-
-df_aae_raw_uv_ir <- df_smooth |>
-  filter(exp_type %in% c("waste_burning", "cooking", "vehicles"),
-         ir_babs  > mean_irbabs,
-         uv_babs  > mean_uvbabs) |>
-  mutate(ir_babs_bg_corr  = ir_babs  - mean_irbabs,
-         uv_babs_bg_corr  = uv_babs - mean_uvbabs) |>
-  group_by(id, emission_source, exp_type) |>
-  summarise(across(c(uv_babs, ir_babs, ir_babs_bg_corr, uv_babs_bg_corr), mean))|>
-  mutate(aae_wo_bg_corr = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5])),
-         aae_bg_corr = -log(uv_babs_bg_corr/ir_babs_bg_corr)/log((parameters$wavelength[1])/(parameters$wavelength[5])))|>
-  select(-uv_babs, -ir_babs, -ir_babs_bg_corr, -uv_babs_bg_corr) |>
-  arrange(by = exp_type)
-
-### calculate mean absorption of each experiment
-
-#### select the aae experiments from data structure
-
-data_structure_aae <- data_structure |>
-  filter(exp_type %in% c("waste_burning", "cooking", "vehicles"))
-
-# calculate aae with raw data
-aae_uv_ir <- df_smooth |>
-  filter(exp_type %in% c("waste_burning", "cooking", "vehicles")) |>
-  group_by(id, emission_source, exp_type) |>
-  summarise(across(c(uv_babs, ir_babs), mean))|>
-  mutate(aae_raw_data = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5])))|>
-  select(-uv_babs, -ir_babs) |>
-  arrange(by = exp_type) |>
-  merge(df_aae_raw_uv_ir)
-
-df_main <- df_smooth
-
-# create processed data files ---------------------------------------------
+# create data files of each experiment ---------------------------------------------
 
 ## aae experiments data
 
-df_aae_exp <- df_aae_raw
-
-## aae calculated for each aae experiment
-
-aae_calculated <- aae
+df_aae <- df_all_raw |>
+  filter(exp_type %in% c("waste_burning", "cooking", "vehicles")) |>
+  select(-comment)
 
 ## mobile monitoring (mm) data
 
-df_mm <- df_main |>
+df_mm <- df_all_raw |>
   filter(exp_type == "mobile_monitoring") |>
   left_join(id_mm, by = "id") |>
   filter(!lat %in% c(0, NA),
          !long %in% c(0, NA)) |>
-  filter(!id %in% c(17:24,65:72))
+  filter(!id %in% c(17:24,65:72)) |>
+  select(-emission_source,
+         -comment,
+         -collocation,
+         -dc_1,
+         -dc_2)
 
 ## personal monitoring (pm) data
 
-df_pm_wo_kacheri <- df_main |>
+df_pm_wo_kacheri <- df_all_raw |>
   filter(exp_type == "personal_monitoring") |>
   left_join(id_pm, by = "id") |>
   filter(!lat %in% c(0, NA),
          !long %in% c(0, NA)) |>
   filter(!settlement_id %in% "Kacheri")
 
-library(hms)
-
-df_pm <- df_main |>
+df_pm <- df_all_raw |>
   filter(exp_type == "personal_monitoring") |>
   filter(!time %in% parse_hms(c("14:24:30",
                                 "14:31:30",
@@ -509,211 +342,62 @@ df_pm <- df_main |>
   filter(settlement_id == "Kacheri",
          !lat %in% c(0, NA),
          !long %in% c(0, NA)) |>
-  bind_rows(df_pm_wo_kacheri)
+  bind_rows(df_pm_wo_kacheri) |>
+  select(-emission_source,
+         -comment,
+         -dc)
 
 df_pm_trips <- data_structure |>
   filter(exp_type == "personal_monitoring") |>
-  left_join(id_pm_trips, by = c("id"))
+  left_join(id_pm_trips, by = c("id")) |>
+  select(-emission_source,
+         -comment,
+         -comments)
 
 ## stationary monitoring data
 
-df_sm <- df_main |>
+df_sm <- df_all_raw |>
   filter(exp_type == "stationary_monitoring") |>
   left_join(id_sm, by = "serial_number") |>
-  drop_na(ir_bcc, aae_blue_ir)
+  select(-emission_source,
+         -comment)
 
-## data quality check
+## sensor collocation data
 
-### sensor collocation
+df_collocation <- df_all_raw |>
+  right_join(id_sc, by = "id") |>
+  select(-emission_source,
+         -comment)
 
-df_collocation <- df_main |>
-  right_join(id_sc, by = "id")
+# exporting data --------------------------------------------------------------
 
-### reduction in negative values after cma
-
-df_negative_count_cma <- df_negative_count
-
-## all monitoring data
-df_monitoring <- df_mm_road_type |>
-  bind_rows(df_pm) |>
-  bind_rows(df_sm) |>
-  bind_rows(df_collocation) |>
-  filter(ir_bcc > 0)
-
-##### for Lars:
-##### following files needs to created
-
-# 1. df_aae_exp
-# 2. aae_calculated
-# 3. df_mm
-# 4. df_pm
-# 5. df_sm
-# 6. df_collocation
-# 7. df_negative_count
-
-
-# meteorology -------------------------------------------------------------
-
-wind_df <- read_csv("data-raw/meteorology/meteorology.csv") |>
-  rename(windspeed = "windspeed (m/s)",
-         winddirection = "winddirection (degrees)",
-         date_time = "timestamp") |>
-  mutate(date_time = dmy_hm(date_time))
-
-wind_df_time <- as_tbl_time(wind_df, index = date_time) |>
-  arrange(date_time)
-
-df_temp_met <- tibble()
-
-for(i in seq_along(unique(data_structure$id))){
-  test <- wind_df_time                         |>
-    filter_time(
-      data_structure$start_time[i]
-      ~ data_structure$end_time[i])
-
-  test <- test |>
-    mutate(
-      id = rep(
-        data_structure$id[i],nrow(test)))
-
-  df_temp_met <- df_temp_met |>
-    bind_rows(test)
-}
-
-df_met <- df_temp_met |>
-  left_join(data_structure, by = "id")
-
-# write data --------------------------------------------------------------
-
-usethis::use_data(df_aae_exp,
-                  df_aae,
-                  aae_calculated,
-                  aae_uv_ir,
-                  df_mm_road_type,
+usethis::use_data(df_aae,
                   df_mm,
+                  df_mm_road_type,
                   df_pm,
+                  df_pm_trips,
                   df_sm,
                   df_collocation,
-                  df_monitoring,
-                  df_negative_count,
-                  df_met,
-                  df_pm_trips,
                   overwrite = TRUE)
 
-df_mm_map <- bcsa::df_pm |>
-  #bind_rows(df_pm) |>
-  drop_na("aae_blue_ir") |>
-  filter(settlement_id %in% c("Ndirande"),
-         id == 90)
+# write dictionary --------------------------------------------------------
 
-df_mm_map |>
-  summarise(min_aae = min(aae_blue_ir),
-            max_aae = max(aae_blue_ir))
+source(here::here("data-raw/package_processing.R"))
 
+file_names <- list.files("data")
 
-library(tidyverse)
-library(lubridate)
-library(hms)
+dictionary <- get_variable_info(data = list(df_aae,
+                                            df_mm,
+                                            df_mm_road_type,
+                                            df_pm,
+                                            df_pm_trips,
+                                            df_sm,
+                                            df_collocation),
+                                directory = rep("data/", length(file_names)),
+                                file_name = file_names)
+dictionary |>
+  write_csv("data-raw/dictionary.csv")
 
-lat_mzedi <- -15.780930
-long_mzedi <- 35.094042
+dictionary |>
+  openxlsx::write.xlsx("data-raw/dictionary.xlsx")
 
-df_mzedi <- data.frame(cbind(lat_mzedi, long_mzedi))
-df_mzedi_map <- st_as_sf(df_mzedi, coords = c("long_mzedi", "lat_mzedi"))
-
-map_data_sf <- st_as_sf(df_mm_map, coords = c("long", "lat"))
-
-
-library(RColorBrewer) # https://colorbrewer2.org/#type=sequential&scheme=PuBu&n=9
-tmap_mode("view")
-
-#color_palette <- alpha(colorRampPalette(c("black", "brown"))(12), alpha = 0.5)
-
-colors_manual <- c('black', '#012B40', '#023858', '#045a8d', '#0570b0', '#3690c0', '#74a9cf', '#a6bddb', '#d0d1e6', '#ece7f2', '#fff7fb', 'brown')
-
-colors_manual <- c('black',  '#3690c0', "brown")
-#
-aae_map <- tm_shape(map_data_sf) +
-  tm_basemap(server = "OpenStreetMap") +
-  tm_dots(col = "aae_blue_ir",
-          size = 0.1,
-          alpha = 1.5,
-          #border.col = "aae_blue_ir",
-          breaks = c(0.79, 1.29, 1.63, 2.15),
-          palette = colors_manual,
-          title = "AAE (475/880nm)") +
-  tm_facets(by = "id", nrow = 2, free.coords = FALSE)
-#tm_shape(df_mzedi_map) +
-#tm_basemap(server = "OpenStreetMap") +
-#tm_dots(col = "black",
-# size = 1,
-# alpha = 1)
-
-aae_map
-
-
-df_mm |>
-  filter(id %in% c(1:8))
-
-## using k-means
-
-#### three clusters of aae were created using mobile
-#### monitoring data. the three clusters should represent
-#### dominant ff, dominant bb, mix of both
-
-### prepare dataset to find clusters
-
-# df_k_means <-  df_main |>
-#   filter(exp_type == "mobile_monitoring") |>
-#   filter_all(all_vars(!is.infinite(.))) |>
-#   left_join(id_mm, by = "id") |>
-#   mutate(aae = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5]))) |>
-#   filter_all(all_vars(!is.infinite(.))) |>
-#   filter(!time_of_day %in% "Morning") |>
-#   select(aae) |>
-#   drop_na()
-
-
-# df_k_means <- df_mm |>
-#   filter(!time_of_day %in% "Morning") |>
-#   bind_rows(df_pm) |>
-#   mutate(aae = -log(uv_babs/ir_babs)/log((parameters$wavelength[1])/(parameters$wavelength[5]))) |>
-#   filter_all(all_vars(!is.infinite(.))) |>
-#   select(aae) |>
-#   drop_na()
-
-
-### perform k-means clustering
-
-# k <- 3
-#
-# result <- kmeans(df_k_means$aae, centers = k)
-#
-# cluster_centers <- tapply(df_k_means$aae, result$cluster, mean)
-#
-# ### calculate the range of each cluster ('aae' max - 'aae' min)
-#
-# cluster_ranges <- tapply(df_k_means$aae, result$cluster, function(cluster_aae) {
-#   max_aae <- max(cluster_aae)
-#   min_aae <- min(cluster_aae)
-#   cluster_range <- cbind(max_aae, min_aae)
-#   return(cluster_range)
-# })
-#
-# unlist(cluster_ranges)
-
-## the clusters interpretation is - 25% of ff means ff dominating
-## and vice-versa
-# Create a new variable 'aae_range' based on 'aae'
-
-# data <- df_k_means %>%
-#   mutate(aae_range = case_when(
-#     aae >= 0 & aae <= 1.328 ~ "ff_dominant",
-#     aae > 1.328 & aae <= 1.759 ~ "mixed",
-#     aae > 1.759 ~ "bb_dominant"
-#   )) |>
-#   drop_na()  |>
-# group_by(settlement_id, aae_range)  |>
-#   summarize(observation_count = n(),
-#             bc_ff = mean(ir_bcc),
-#             bc_bb = mean(ir_bcc))

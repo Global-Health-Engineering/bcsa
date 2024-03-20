@@ -56,7 +56,7 @@ devtools::install_github("Global-Health-Engineering/bcsa")
 This data package has seven datasets:
 `df_aae` 
 `df_mm`
-`df_mm_roads` 
+`df_mm_road_type` 
 `df_pm`
 `df_pm_trips`
 `df_sm`
@@ -132,7 +132,7 @@ readr::read_csv("data-raw/dictionary.csv") |>
 ```
 
 
-## df_mm_roads
+## df_mm_road_type
 
 This dataset is collected during mobile monitoring and is the same as `df_mm`, except that the highways and non-highways are demarcated in this dataset. 
 
@@ -140,17 +140,17 @@ This dataset is collected during mobile monitoring and is the same as `df_mm`, e
 library(bcsa)
 ```
 
-The `df_mm_roads` data set has `r ncol(df_mm_roads)` variables and `r nrow(df_mm_roads)`
+The `df_mm_road_type` data set has `r ncol(df_mm_road_type)` variables and `r nrow(df_mm_road_type)`
 observations. For an overview of the variable names, see the following
 table.
 
 ```{r, eval=FALSE}
-df_mm_roads
+df_mm_road_type
 ```
 
 ```{r, echo=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |> 
-  dplyr::filter(file_name == "df_mm_roads.rda") |> 
+  dplyr::filter(file_name == "df_mm_road_type.rda") |> 
   dplyr::select(variable_name:description) |> 
   knitr::kable()
 ```

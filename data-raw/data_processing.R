@@ -395,9 +395,9 @@ dictionary <- get_variable_info(data = list(df_aae,
                                             df_collocation),
                                 directory = rep("data/", length(file_names)),
                                 file_name = file_names)
-dictionary |>
-  write_csv("data-raw/dictionary.csv")
-
-dictionary |>
-  openxlsx::write.xlsx("data-raw/dictionary.xlsx")
+# dictionary |>
+#   write_csv("data-raw/dictionary.csv")
+#
+# dictionary |>
+#   openxlsx::write.xlsx("data-raw/dictionary.xlsx")
 

@@ -380,4 +380,21 @@ usethis::use_data(df_aae,
                   df_collocation,
                   overwrite = TRUE)
 
+# Export processed data to csv and xlsx files ----------------------------------
+
+readr::write_csv(df_aae, here::here("inst", "extdata", "df_aae.csv"))
+readr::write_csv(df_mm, here::here("inst", "extdata", "df_mm.csv"))
+readr::write_csv(df_mm_road_type, here::here("inst", "extdata", "df_mm_road_type.csv"))
+readr::write_csv(df_pm, here::here("inst", "extdata", "df_pm.csv"))
+readr::write_csv(df_pm_trips, here::here("inst", "extdata", "df_pm_trips.csv"))
+readr::write_csv(df_sm, here::here("inst", "extdata", "df_sm.csv"))
+readr::write_csv(df_collocation, here::here("inst", "extdata", "df_collocation.csv"))
+
+openxlsx::write.xlsx(df_aae, here::here("inst", "extdata", "df_aae.xlsx"))
+openxlsx::write.xlsx(df_mm, here::here("inst", "extdata", "df_mm.xlsx"))
+openxlsx::write.xlsx(df_mm_road_type, here::here("inst", "extdata", "df_mm_road_type.xlsx"))
+openxlsx::write.xlsx(df_pm, here::here("inst", "extdata", "df_pm.xlsx"))
+openxlsx::write.xlsx(df_pm_trips, here::here("inst", "extdata", "df_pm_trips.xlsx"))
+openxlsx::write.xlsx(df_sm, here::here("inst", "extdata", "df_sm.xlsx"))
+openxlsx::write.xlsx(df_collocation, here::here("inst", "extdata", "df_collocation.xlsx"))
 

@@ -37,15 +37,18 @@ LAC from fossil fuel and biomass based sources. The second project is to
 determine the light absorbing carbon concentrations by mobile, personal
 and stationary monitoring in Blantyre.
 
-The package includes the following datasets: 1. Data of experiments to
-determine AAE values 2. Mobile monitoring data in eight settlements 3.
-Mobile monitoring data classified by highways (main_road) and
-non-highways (non_main_roads) in eigth settlements 4. Personal
-monitoring data in four settlements 5. Data on times when open waste
-burning was observed during the personal monitoring combined with
-personal monitoring data 6. Raw monitoring data from stationary
-monitoring in two settlements 7. Data when the two LAC monitors are
-placed and run next to each other to check data quality
+The package includes the following seven datasets:
+
+1.  Data of experiments to determine AAE values
+2.  Mobile monitoring data in eight settlements
+3.  Mobile monitoring data classified by highways (main_road) and
+    non-highways (non_main_roads) in eigth settlements
+4.  Personal monitoring data in four settlements
+5.  Data on times when open waste burning was observed during the
+    personal monitoring combined with personal monitoring data
+6.  Raw monitoring data from stationary monitoring in two settlements
+7.  Data when the two LAC monitors are placed and run next to each other
+    to check data quality
 
 This study used the MA200 micro-aethalometer to measure the light
 absorbing carbon (LAC) concentrations. The MA200 measures the LAC
@@ -60,6 +63,25 @@ You can install the development version of bcsa from
 ```{r installation, eval=FALSE, echo=TRUE}
 # install.packages("devtools")
 devtools::install_github("Global-Health-Engineering/bcsa")
+```
+
+Alternatively, you can download the individual datasets as a CSV or XLSX
+file from the table below.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+extdata_path <- "https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/"
+
+read_csv("data-raw/dictionary.csv") |> 
+  distinct(file_name) |> 
+  dplyr::mutate(file_name = str_remove(file_name, ".rda")) |> 
+  dplyr::rename(dataset = file_name) |> 
+  mutate(
+    CSV = paste0("[Download CSV](", extdata_path, dataset, ".csv)"),
+    XLSX = paste0("[Download XLSX](", extdata_path, dataset, ".xlsx)")
+  ) |> 
+  knitr::kable()
+
 ```
 
 # Datasets

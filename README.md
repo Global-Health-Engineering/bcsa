@@ -43,22 +43,15 @@ devtools::install_github("Global-Health-Engineering/bcsa")
 Alternatively, you can download the individual datasets as a CSV or XLSX
 file from the table below.
 
-| dataset           | CSV                                                                                                           | XLSX                                                                                                            |
-|:------------------|:--------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|
-| NA                | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/NA.csv)                | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/NA.xlsx)                |
-| aae_calculated    | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/aae_calculated.csv)    | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/aae_calculated.xlsx)    |
-| aae_uv_ir         | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/aae_uv_ir.csv)         | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/aae_uv_ir.xlsx)         |
-| df_aae_exp        | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_aae_exp.csv)        | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_aae_exp.xlsx)        |
-| df_aae            | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_aae.csv)            | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_aae.xlsx)            |
-| df_collocation    | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_collocation.csv)    | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_collocation.xlsx)    |
-| df_met            | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_met.csv)            | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_met.xlsx)            |
-| df_mm             | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_mm.csv)             | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_mm.xlsx)             |
-| df_mm_road_type   | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_mm_road_type.csv)   | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_mm_road_type.xlsx)   |
-| df_monitoring     | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_monitoring.csv)     | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_monitoring.xlsx)     |
-| df_negative_count | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_negative_count.csv) | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_negative_count.xlsx) |
-| df_pm_trips       | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_pm_trips.csv)       | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_pm_trips.xlsx)       |
-| df_pm             | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_pm.csv)             | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_pm.xlsx)             |
-| df_sm             | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_sm.csv)             | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_sm.xlsx)             |
+| dataset         | CSV                                                                                                         | XLSX                                                                                                          |
+|:----------------|:------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
+| df_aae          | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_aae.csv)          | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_aae.xlsx)          |
+| df_collocation  | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_collocation.csv)  | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_collocation.xlsx)  |
+| df_mm           | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_mm.csv)           | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_mm.xlsx)           |
+| df_mm_road_type | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_mm_road_type.csv) | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_mm_road_type.xlsx) |
+| df_pm           | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_pm.csv)           | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_pm.xlsx)           |
+| df_pm_trips     | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_pm_trips.csv)     | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_pm_trips.xlsx)     |
+| df_sm           | [Download CSV](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_sm.csv)           | [Download XLSX](https://github.com/Global-Health-Engineering/bcsa/raw/main/inst/extdata/df_sm.xlsx)           |
 
 # Datasets
 
@@ -125,7 +118,7 @@ df_aae |>
   gt::as_raw_html()
 ```
 
-<div id="nscezxsuno" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="znwhigcnyl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
     &#10;    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
@@ -303,79 +296,13 @@ description
 <tbody>
 <tr>
 <td style="text-align:left;">
-id
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-emission_source
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-exp_type
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aae_raw_data
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aae_wo_bg_corr
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aae_bg_corr
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 serial_number
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
-NA
+serial number of the MA200 monitoring from which the data is collected
 </td>
 </tr>
 <tr>
@@ -386,7 +313,9 @@ session_id
 double
 </td>
 <td style="text-align:left;">
-NA
+session number of the MA200 monitor (each monitoring session is
+automatically given a number in the output file of MA200 monitoring
+data)
 </td>
 </tr>
 <tr>
@@ -397,7 +326,7 @@ date
 double
 </td>
 <td style="text-align:left;">
-NA
+date of monitoring
 </td>
 </tr>
 <tr>
@@ -408,7 +337,7 @@ time
 double
 </td>
 <td style="text-align:left;">
-NA
+time of monitoring
 </td>
 </tr>
 <tr>
@@ -419,7 +348,7 @@ lat
 double
 </td>
 <td style="text-align:left;">
-NA
+latitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -430,7 +359,7 @@ long
 double
 </td>
 <td style="text-align:left;">
-NA
+longitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -441,7 +370,8 @@ uv_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the UV (ultravoilet) wavelength channel
+in ng/m3
 </td>
 </tr>
 <tr>
@@ -452,7 +382,7 @@ blue_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the Blue wavelength channel in ng/m3
 </td>
 </tr>
 <tr>
@@ -463,7 +393,8 @@ ir_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the IR (infrared) wavelength channel in
+ng/m3
 </td>
 </tr>
 <tr>
@@ -474,7 +405,8 @@ uv_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the UV (ultravoilet)
+wavelength channel
 </td>
 </tr>
 <tr>
@@ -485,7 +417,7 @@ blue_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the Blue wavelength channel
 </td>
 </tr>
 <tr>
@@ -496,7 +428,8 @@ ir_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the IR (infrared) wavelength
+channel
 </td>
 </tr>
 <tr>
@@ -507,7 +440,7 @@ date_time
 double
 </td>
 <td style="text-align:left;">
-NA
+date and time of monitoring
 </td>
 </tr>
 <tr>
@@ -518,7 +451,7 @@ day_type
 character
 </td>
 <td style="text-align:left;">
-NA
+type of day of monitoring - weekend or weeday
 </td>
 </tr>
 <tr>
@@ -529,7 +462,8 @@ id
 double
 </td>
 <td style="text-align:left;">
-NA
+id is a unique identifier given to every monitoring session and
+experiment given in the data structure
 </td>
 </tr>
 <tr>
@@ -540,7 +474,7 @@ date_start
 double
 </td>
 <td style="text-align:left;">
-NA
+starting date of the experiment
 </td>
 </tr>
 <tr>
@@ -551,7 +485,7 @@ date_end
 double
 </td>
 <td style="text-align:left;">
-NA
+end date of the experiment
 </td>
 </tr>
 <tr>
@@ -562,7 +496,7 @@ start_time
 double
 </td>
 <td style="text-align:left;">
-NA
+starting time of the experiment
 </td>
 </tr>
 <tr>
@@ -573,7 +507,7 @@ end_time
 double
 </td>
 <td style="text-align:left;">
-NA
+end time of the experiment
 </td>
 </tr>
 <tr>
@@ -584,7 +518,7 @@ exp_type
 character
 </td>
 <td style="text-align:left;">
-NA
+type of experiment
 </td>
 </tr>
 <tr>
@@ -595,7 +529,7 @@ emission_source
 character
 </td>
 <td style="text-align:left;">
-NA
+source of emission
 </td>
 </tr>
 </tbody>
@@ -627,7 +561,7 @@ df_mm |>
   gt::as_raw_html()
 ```
 
-<div id="taohrmuoxi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="azmruowqow" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
     &#10;    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
@@ -825,7 +759,7 @@ serial_number
 character
 </td>
 <td style="text-align:left;">
-NA
+serial number of the MA200 monitoring from which the data is collected
 </td>
 </tr>
 <tr>
@@ -836,7 +770,9 @@ session_id
 double
 </td>
 <td style="text-align:left;">
-NA
+session number of the MA200 monitor (each monitoring session is
+automatically given a number in the output file of MA200 monitoring
+data)
 </td>
 </tr>
 <tr>
@@ -847,7 +783,7 @@ date
 double
 </td>
 <td style="text-align:left;">
-NA
+date of monitoring
 </td>
 </tr>
 <tr>
@@ -858,7 +794,7 @@ time
 double
 </td>
 <td style="text-align:left;">
-NA
+time of monitoring
 </td>
 </tr>
 <tr>
@@ -869,7 +805,7 @@ lat
 double
 </td>
 <td style="text-align:left;">
-NA
+latitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -880,7 +816,7 @@ long
 double
 </td>
 <td style="text-align:left;">
-NA
+longitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -891,7 +827,8 @@ uv_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the UV (ultravoilet) wavelength channel
+in ng/m3
 </td>
 </tr>
 <tr>
@@ -902,7 +839,7 @@ blue_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the Blue wavelength channel in ng/m3
 </td>
 </tr>
 <tr>
@@ -913,7 +850,8 @@ ir_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the IR (infrared) wavelength channel in
+ng/m3
 </td>
 </tr>
 <tr>
@@ -924,7 +862,8 @@ uv_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the UV (ultravoilet)
+wavelength channel
 </td>
 </tr>
 <tr>
@@ -935,7 +874,7 @@ blue_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the Blue wavelength channel
 </td>
 </tr>
 <tr>
@@ -946,7 +885,8 @@ ir_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the IR (infrared) wavelength
+channel
 </td>
 </tr>
 <tr>
@@ -957,7 +897,7 @@ date_time
 double
 </td>
 <td style="text-align:left;">
-NA
+date and time of monitoring
 </td>
 </tr>
 <tr>
@@ -968,7 +908,7 @@ day_type
 character
 </td>
 <td style="text-align:left;">
-NA
+type of day of monitoring - weekend or weeday
 </td>
 </tr>
 <tr>
@@ -979,7 +919,8 @@ id
 double
 </td>
 <td style="text-align:left;">
-NA
+id is a unique identifier given to every monitoring session and
+experiment given in the data structure
 </td>
 </tr>
 <tr>
@@ -990,7 +931,7 @@ date_start
 double
 </td>
 <td style="text-align:left;">
-NA
+starting date of the experiment
 </td>
 </tr>
 <tr>
@@ -1001,7 +942,7 @@ date_end
 double
 </td>
 <td style="text-align:left;">
-NA
+end date of the experiment
 </td>
 </tr>
 <tr>
@@ -1012,40 +953,7 @@ exp_type
 character
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-emission_source
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-comment
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-id_road_type
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
+type of experiment
 </td>
 </tr>
 <tr>
@@ -1056,7 +964,7 @@ settlement_id
 character
 </td>
 <td style="text-align:left;">
-NA
+settlement name at which the monitoring was conducted
 </td>
 </tr>
 <tr>
@@ -1067,40 +975,8 @@ time_of_day
 character
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-collocation
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-dc_1
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-dc_2
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
+the days are divided into three types - morning, first half and second
+half
 </td>
 </tr>
 <tr>
@@ -1111,7 +987,7 @@ type_of_settlement
 character
 </td>
 <td style="text-align:left;">
-NA
+type of settlement - formal or informal
 </td>
 </tr>
 <tr>
@@ -1122,7 +998,7 @@ start_time
 double
 </td>
 <td style="text-align:left;">
-NA
+starting time of the experiment
 </td>
 </tr>
 <tr>
@@ -1133,337 +1009,7 @@ end_time
 double
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-type_of_road
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-serial_number
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-session_id
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-date
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-lat
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-long
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-uv_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-blue_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-green_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-red_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ir_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-uv_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-blue_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-green_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-red_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ir_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-date_time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-day_type
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-id
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-date_start
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-date_end
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-start_time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-end_time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-exp_type
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-emission_source
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-comment
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aae_uv_ir
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aae_blue_ir
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-main_exp
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
+ending time of the experiment
 </td>
 </tr>
 </tbody>
@@ -1487,7 +1033,7 @@ df_mm_road_type |>
   gt::as_raw_html()
 ```
 
-<div id="ibygaezvww" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="quvmhdfyzw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
     &#10;    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
@@ -1734,7 +1280,7 @@ serial_number
 character
 </td>
 <td style="text-align:left;">
-NA
+serial number of the MA200 monitoring from which the data is collected
 </td>
 </tr>
 <tr>
@@ -1745,7 +1291,9 @@ session_id
 double
 </td>
 <td style="text-align:left;">
-NA
+session number of the MA200 monitor (each monitoring session is
+automatically given a number in the output file of MA200 monitoring
+data)
 </td>
 </tr>
 <tr>
@@ -1756,7 +1304,7 @@ date
 double
 </td>
 <td style="text-align:left;">
-NA
+date of monitoring
 </td>
 </tr>
 <tr>
@@ -1767,7 +1315,7 @@ time
 double
 </td>
 <td style="text-align:left;">
-NA
+time of monitoring
 </td>
 </tr>
 <tr>
@@ -1778,7 +1326,7 @@ lat
 double
 </td>
 <td style="text-align:left;">
-NA
+latitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -1789,7 +1337,7 @@ long
 double
 </td>
 <td style="text-align:left;">
-NA
+longitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -1800,7 +1348,8 @@ uv_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the UV (ultravoilet) wavelength channel
+in ng/m3
 </td>
 </tr>
 <tr>
@@ -1811,29 +1360,7 @@ blue_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-green_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-red_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
+concentration of black carbon at the Blue wavelength channel in ng/m3
 </td>
 </tr>
 <tr>
@@ -1844,7 +1371,8 @@ ir_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the IR (infrared) wavelength channel in
+ng/m3
 </td>
 </tr>
 <tr>
@@ -1855,7 +1383,8 @@ uv_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the UV (ultravoilet)
+wavelength channel
 </td>
 </tr>
 <tr>
@@ -1866,62 +1395,7 @@ blue_babs
 double
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-green_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-red_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ir_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-uv_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-blue_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the Blue wavelength channel
 </td>
 </tr>
 <tr>
@@ -1932,7 +1406,8 @@ ir_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the IR (infrared) wavelength
+channel
 </td>
 </tr>
 <tr>
@@ -1943,7 +1418,7 @@ date_time
 double
 </td>
 <td style="text-align:left;">
-NA
+date and time of monitoring
 </td>
 </tr>
 <tr>
@@ -1954,7 +1429,7 @@ day_type
 character
 </td>
 <td style="text-align:left;">
-NA
+type of day of monitoring - weekend or weeday
 </td>
 </tr>
 <tr>
@@ -1965,7 +1440,8 @@ id
 double
 </td>
 <td style="text-align:left;">
-NA
+id is a unique identifier given to every monitoring session and
+experiment given in the data structure
 </td>
 </tr>
 <tr>
@@ -1976,7 +1452,7 @@ date_start
 double
 </td>
 <td style="text-align:left;">
-NA
+starting date of the experiment
 </td>
 </tr>
 <tr>
@@ -1987,7 +1463,7 @@ date_end
 double
 </td>
 <td style="text-align:left;">
-NA
+end date of the experiment
 </td>
 </tr>
 <tr>
@@ -1998,7 +1474,7 @@ start_time
 double
 </td>
 <td style="text-align:left;">
-NA
+starting time of the experiment
 </td>
 </tr>
 <tr>
@@ -2009,7 +1485,7 @@ end_time
 double
 </td>
 <td style="text-align:left;">
-NA
+end time of the experiment
 </td>
 </tr>
 <tr>
@@ -2020,51 +1496,7 @@ exp_type
 character
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-emission_source
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-comment
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aae_uv_ir
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aae_blue_ir
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
+type of experiment
 </td>
 </tr>
 <tr>
@@ -2075,18 +1507,7 @@ settlement_id
 character
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-settlement_id
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
+settlement name at which the monitoring was conducted
 </td>
 </tr>
 <tr>
@@ -2097,7 +1518,8 @@ time_of_day
 character
 </td>
 <td style="text-align:left;">
-NA
+the days are divided into three types - morning, first half and second
+half
 </td>
 </tr>
 <tr>
@@ -2108,7 +1530,29 @@ type_of_settlement
 character
 </td>
 <td style="text-align:left;">
-NA
+type of settlement - formal or informal
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+id_road_type
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+a unique id given to different roads sections
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+type_of_road
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+roads are categorised as highways and non-highways
 </td>
 </tr>
 </tbody>
@@ -2140,7 +1584,7 @@ df_pm |>
   gt::as_raw_html()
 ```
 
-<div id="fyidxapthy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="leldmugymc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
     &#10;    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
@@ -2332,24 +1776,13 @@ description
 <tbody>
 <tr>
 <td style="text-align:left;">
-id
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 serial_number
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
-NA
+serial number of the MA200 monitoring from which the data is collected
 </td>
 </tr>
 <tr>
@@ -2360,7 +1793,157 @@ session_id
 double
 </td>
 <td style="text-align:left;">
-NA
+session number of the MA200 monitor (each monitoring session is
+automatically given a number in the output file of MA200 monitoring
+data)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+date
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+date of monitoring
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+time
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+time of monitoring
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lat
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+latitude of location of monitoring
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+long
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+longitude of location of monitoring
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+uv_bcc
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+concentration of black carbon at the UV (ultravoilet) wavelength channel
+in ng/m3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+blue_bcc
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+concentration of black carbon at the Blue wavelength channel in ng/m3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ir_bcc
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+concentration of black carbon at the IR (infrared) wavelength channel in
+ng/m3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+uv_babs
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+absorption coefficient of black carbon at the UV (ultravoilet)
+wavelength channel
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+blue_babs
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+absorption coefficient of black carbon at the Blue wavelength channel
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ir_babs
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+absorption coefficient of black carbon at the IR (infrared) wavelength
+channel
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+date_time
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+date and time of monitoring
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+day_type
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+type of day of monitoring - weekend or weeday
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+id
+</td>
+<td style="text-align:left;">
+double
+</td>
+<td style="text-align:left;">
+id is a unique identifier given to every monitoring session and
+experiment given in the data structure
 </td>
 </tr>
 <tr>
@@ -2371,7 +1954,7 @@ date_start
 double
 </td>
 <td style="text-align:left;">
-NA
+starting date of the experiment
 </td>
 </tr>
 <tr>
@@ -2382,7 +1965,7 @@ date_end
 double
 </td>
 <td style="text-align:left;">
-NA
+end date of the experiment
 </td>
 </tr>
 <tr>
@@ -2393,7 +1976,7 @@ start_time
 double
 </td>
 <td style="text-align:left;">
-NA
+starting time of the experiment
 </td>
 </tr>
 <tr>
@@ -2404,7 +1987,7 @@ end_time
 double
 </td>
 <td style="text-align:left;">
-NA
+end time of the experiment
 </td>
 </tr>
 <tr>
@@ -2415,62 +1998,7 @@ exp_type
 character
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-emission_source
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-comment
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-event
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-comments
-</td>
-<td style="text-align:left;">
-logical
-</td>
-<td style="text-align:left;">
-NA
+type of experiment
 </td>
 </tr>
 <tr>
@@ -2481,40 +2009,30 @@ settlement_id
 character
 </td>
 <td style="text-align:left;">
-NA
+settlement name at which the monitoring was conducted
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-event
+time_of_day
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
-NA
+the days are divided into three types - morning, first half and second
+half
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-settlement_id
+type_of_settlement
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
-NA
+type of settlement - formal or informal
 </td>
 </tr>
 </tbody>
@@ -2539,7 +2057,7 @@ df_pm_trips |>
   gt::as_raw_html()
 ```
 
-<div id="beeokgmqky" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mlnkivgmuz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
     &#10;    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
@@ -2647,123 +2165,13 @@ description
 <tbody>
 <tr>
 <td style="text-align:left;">
-date_time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-atmosphericpressure (kPa)
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-precipitation (mm)
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-radiation (W/m2)
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-relativehumidity (-)
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-temperature (degrees Celsius)
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-winddirection
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-windgusts (m/s)
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-windspeed
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-id
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 serial_number
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
-NA
+serial number of the MA200 monitoring from which the data is collected
 </td>
 </tr>
 <tr>
@@ -2774,106 +2182,9 @@ session_id
 double
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-date_start
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-date_end
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-start_time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-end_time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-exp_type
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-emission_source
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-comment
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-serial_number
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-session_id
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
+session number of the MA200 monitor (each monitoring session is
+automatically given a number in the output file of MA200 monitoring
+data)
 </td>
 </tr>
 <tr>
@@ -2884,7 +2195,7 @@ date
 double
 </td>
 <td style="text-align:left;">
-NA
+date of monitoring
 </td>
 </tr>
 <tr>
@@ -2895,117 +2206,7 @@ time
 double
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-lat
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-long
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-uv_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-blue_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ir_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-uv_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-blue_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ir_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-date_time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-day_type
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
+time when a burning event was observed
 </td>
 </tr>
 <tr>
@@ -3016,7 +2217,8 @@ id
 double
 </td>
 <td style="text-align:left;">
-NA
+id is a unique identifier given to every monitoring session and
+experiment given in the data structure
 </td>
 </tr>
 <tr>
@@ -3027,7 +2229,7 @@ date_start
 double
 </td>
 <td style="text-align:left;">
-NA
+starting date of the experiment
 </td>
 </tr>
 <tr>
@@ -3038,7 +2240,7 @@ date_end
 double
 </td>
 <td style="text-align:left;">
-NA
+ending date of the experiment
 </td>
 </tr>
 <tr>
@@ -3049,7 +2251,7 @@ start_time
 double
 </td>
 <td style="text-align:left;">
-NA
+starting time of the experiment
 </td>
 </tr>
 <tr>
@@ -3060,7 +2262,7 @@ end_time
 double
 </td>
 <td style="text-align:left;">
-NA
+ending time of the experiment
 </td>
 </tr>
 <tr>
@@ -3071,7 +2273,7 @@ exp_type
 character
 </td>
 <td style="text-align:left;">
-NA
+type of experiment
 </td>
 </tr>
 <tr>
@@ -3082,7 +2284,7 @@ settlement_id
 character
 </td>
 <td style="text-align:left;">
-NA
+settlement name at which the monitoring was conducted
 </td>
 </tr>
 </tbody>
@@ -3107,7 +2309,7 @@ df_sm |>
   gt::as_raw_html()
 ```
 
-<div id="ahnrnoncgi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="phqflrcmqf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
     &#10;    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
@@ -3291,7 +2493,7 @@ serial_number
 character
 </td>
 <td style="text-align:left;">
-NA
+serial number of the MA200 monitoring from which the data is collected
 </td>
 </tr>
 <tr>
@@ -3302,7 +2504,9 @@ session_id
 double
 </td>
 <td style="text-align:left;">
-NA
+session number of the MA200 monitor (each monitoring session is
+automatically given a number in the output file of MA200 monitoring
+data)
 </td>
 </tr>
 <tr>
@@ -3313,7 +2517,7 @@ date
 double
 </td>
 <td style="text-align:left;">
-NA
+date of monitoring
 </td>
 </tr>
 <tr>
@@ -3324,7 +2528,7 @@ time
 double
 </td>
 <td style="text-align:left;">
-NA
+time of monitoring
 </td>
 </tr>
 <tr>
@@ -3335,7 +2539,7 @@ lat
 double
 </td>
 <td style="text-align:left;">
-NA
+latitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -3346,7 +2550,7 @@ long
 double
 </td>
 <td style="text-align:left;">
-NA
+longitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -3357,7 +2561,8 @@ uv_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the UV (ultravoilet) wavelength channel
+in ng/m3
 </td>
 </tr>
 <tr>
@@ -3368,7 +2573,7 @@ blue_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the Blue wavelength channel in ng/m3
 </td>
 </tr>
 <tr>
@@ -3379,7 +2584,8 @@ ir_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the IR (infrared) wavelength channel in
+ng/m3
 </td>
 </tr>
 <tr>
@@ -3390,7 +2596,8 @@ uv_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the UV (ultravoilet)
+wavelength channel
 </td>
 </tr>
 <tr>
@@ -3401,7 +2608,7 @@ blue_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the Blue wavelength channel
 </td>
 </tr>
 <tr>
@@ -3412,7 +2619,8 @@ ir_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the IR (infrared) wavelength
+channel
 </td>
 </tr>
 <tr>
@@ -3423,7 +2631,7 @@ date_time
 double
 </td>
 <td style="text-align:left;">
-NA
+date and time of monitoring
 </td>
 </tr>
 <tr>
@@ -3434,7 +2642,7 @@ day_type
 character
 </td>
 <td style="text-align:left;">
-NA
+type of day of monitoring - weekend or weeday
 </td>
 </tr>
 <tr>
@@ -3445,7 +2653,8 @@ id
 double
 </td>
 <td style="text-align:left;">
-NA
+id is a unique identifier given to every monitoring session and
+experiment given in the data structure
 </td>
 </tr>
 <tr>
@@ -3456,7 +2665,7 @@ date_start
 double
 </td>
 <td style="text-align:left;">
-NA
+starting date of the experiment
 </td>
 </tr>
 <tr>
@@ -3467,7 +2676,7 @@ date_end
 double
 </td>
 <td style="text-align:left;">
-NA
+end date of the experiment
 </td>
 </tr>
 <tr>
@@ -3478,7 +2687,7 @@ start_time
 double
 </td>
 <td style="text-align:left;">
-NA
+starting time of the experiment
 </td>
 </tr>
 <tr>
@@ -3489,7 +2698,7 @@ end_time
 double
 </td>
 <td style="text-align:left;">
-NA
+end time of the experiment
 </td>
 </tr>
 <tr>
@@ -3500,18 +2709,18 @@ exp_type
 character
 </td>
 <td style="text-align:left;">
-NA
+type of experiment
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-main_exp
+settlement_id
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
-NA
+settlement name at which the monitoring was conducted
 </td>
 </tr>
 </tbody>
@@ -3535,7 +2744,7 @@ df_collocation |>
   gt::as_raw_html()
 ```
 
-<div id="zcyredndfv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lxasjaajdp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
     &#10;    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
@@ -3719,7 +2928,7 @@ serial_number
 character
 </td>
 <td style="text-align:left;">
-NA
+serial number of the MA200 monitoring from which the data is collected
 </td>
 </tr>
 <tr>
@@ -3730,7 +2939,9 @@ session_id
 double
 </td>
 <td style="text-align:left;">
-NA
+session number of the MA200 monitor (each monitoring session is
+automatically given a number in the output file of MA200 monitoring
+data)
 </td>
 </tr>
 <tr>
@@ -3741,7 +2952,7 @@ date
 double
 </td>
 <td style="text-align:left;">
-NA
+date of monitoring
 </td>
 </tr>
 <tr>
@@ -3752,7 +2963,7 @@ time
 double
 </td>
 <td style="text-align:left;">
-NA
+time of monitoring
 </td>
 </tr>
 <tr>
@@ -3763,7 +2974,7 @@ lat
 double
 </td>
 <td style="text-align:left;">
-NA
+latitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -3774,7 +2985,7 @@ long
 double
 </td>
 <td style="text-align:left;">
-NA
+longitude of location of monitoring
 </td>
 </tr>
 <tr>
@@ -3785,7 +2996,8 @@ uv_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the UV (ultravoilet) wavelength channel
+in ng/m3
 </td>
 </tr>
 <tr>
@@ -3796,29 +3008,7 @@ blue_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-green_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-red_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
+concentration of black carbon at the Blue wavelength channel in ng/m3
 </td>
 </tr>
 <tr>
@@ -3829,7 +3019,8 @@ ir_bcc
 double
 </td>
 <td style="text-align:left;">
-NA
+concentration of black carbon at the IR (infrared) wavelength channel in
+ng/m3
 </td>
 </tr>
 <tr>
@@ -3840,7 +3031,8 @@ uv_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the UV (ultravoilet)
+wavelength channel
 </td>
 </tr>
 <tr>
@@ -3851,62 +3043,7 @@ blue_babs
 double
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-green_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-red_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ir_bcc
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-uv_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-blue_babs
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the Blue wavelength channel
 </td>
 </tr>
 <tr>
@@ -3917,7 +3054,8 @@ ir_babs
 double
 </td>
 <td style="text-align:left;">
-NA
+absorption coefficient of black carbon at the IR (infrared) wavelength
+channel
 </td>
 </tr>
 <tr>
@@ -3928,7 +3066,7 @@ date_time
 double
 </td>
 <td style="text-align:left;">
-NA
+date and time of monitoring
 </td>
 </tr>
 <tr>
@@ -3939,7 +3077,7 @@ day_type
 character
 </td>
 <td style="text-align:left;">
-NA
+type of day of monitoring - weekend or weeday
 </td>
 </tr>
 <tr>
@@ -3950,7 +3088,8 @@ id
 double
 </td>
 <td style="text-align:left;">
-NA
+id is a unique identifier given to every monitoring session and
+experiment given in the data structure
 </td>
 </tr>
 <tr>
@@ -3961,7 +3100,7 @@ date_start
 double
 </td>
 <td style="text-align:left;">
-NA
+starting date of the experiment
 </td>
 </tr>
 <tr>
@@ -3972,139 +3111,7 @@ date_end
 double
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-exp_type
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-emission_source
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-comment
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aae_uv_ir
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aae_blue_ir
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-id_road_type
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-settlement_id
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-time_of_day
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-collocation
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-dc_1
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-dc_2
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-type_of_settlement
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
+end date of the experiment
 </td>
 </tr>
 <tr>
@@ -4115,7 +3122,7 @@ start_time
 double
 </td>
 <td style="text-align:left;">
-NA
+starting time of the experiment
 </td>
 </tr>
 <tr>
@@ -4126,40 +3133,7 @@ end_time
 double
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-type_of_road
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-start_time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-end_time
-</td>
-<td style="text-align:left;">
-double
-</td>
-<td style="text-align:left;">
-NA
+end time of the experiment
 </td>
 </tr>
 <tr>
@@ -4170,40 +3144,18 @@ exp_type
 character
 </td>
 <td style="text-align:left;">
-NA
+type of experiment
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-settlement_id
+main_exp
 </td>
 <td style="text-align:left;">
 character
 </td>
 <td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-time_of_day
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-type_of_settlement
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-NA
+the experiment phase during which the sensors were collocated
 </td>
 </tr>
 </tbody>

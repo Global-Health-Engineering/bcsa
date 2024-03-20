@@ -380,25 +380,4 @@ usethis::use_data(df_aae,
                   df_collocation,
                   overwrite = TRUE)
 
-# write dictionary --------------------------------------------------------
-
-
-source(here::here("data-raw/package_processing.R"))
-
-file_names <- list.files("data")
-
-dictionary <- get_variable_info(data = list(df_aae,
-                                            df_mm,
-                                            df_mm_road_type,
-                                            df_pm,
-                                            df_pm_trips,
-                                            df_sm,
-                                            df_collocation),
-                                directory = rep("data/", length(file_names)),
-                                file_name = file_names)
-# dictionary |>
-#   write_csv("data-raw/dictionary.csv")
-#
-# dictionary |>
-#   openxlsx::write.xlsx("data-raw/dictionary.xlsx")
 

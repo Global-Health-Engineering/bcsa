@@ -1,11 +1,14 @@
 ---
 output: github_document
+always_allow_html: true
 editor_options: 
   chunk_output_type: console
   markdown: 
     wrap: 72
 execute:
-  echo: false    
+  echo: false
+  message: false
+  warning: false
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -94,10 +97,13 @@ This data package has seven datasets: `df_aae` `df_mm` `df_mm_road_type`
 This dataset contains data from experiments to determine AAE values of
 local pollution sources in Blantyre, Malawi.
 
-• Vehicular emission • Waste Burning (Plastics) • Waste Burning
-(Plastic-based textiles, e.g., polyester) • Waste Burning (Garden Waste)
-• Waste Burning (Cardboard and Paper) • Mixed waste burning • Cooking
-(Using Solid Biofuels - Wood, Charcoal, Briquettes)
+- Vehicular emission
+- Waste Burning (Plastics)
+- Waste Burning (Plastic-based textiles, e.g., polyester)
+- Waste Burning (Garden Waste)
+- Waste Burning (Cardboard and Paper)
+- Mixed waste burning
+- Cooking (Using Solid Biofuels - Wood, Charcoal, Briquettes)
 
 All the data mentioned above were collected over 17 days, from 16th May
 to 1st June, 2023.
@@ -133,7 +139,6 @@ of the shelter. Sampling was conducted for 20 minutes on three days
 during peak cooking times.
 
 ```{r}
-
 library(bcsa)
 ```
 
@@ -141,15 +146,20 @@ The `df_aae` data set has `r ncol(df_aae)` variables and
 `r nrow(df_aae)` observations. For an overview of the variable names,
 see the following table.
 
-```{r, eval=FALSE}
-df_aae 
+```{r, eval=TRUE}
+df_aae |> 
+  head() |> 
+  gt::gt() |>
+  gt::as_raw_html()
 ```
 
 ```{r, echo=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |> 
   dplyr::filter(file_name == "df_aae.rda") |> 
   dplyr::select(variable_name:description) |> 
-  knitr::kable()
+  knitr::kable() |> 
+  kableExtra::kable_styling() |> 
+  kableExtra::scroll_box(height = "400px")
 ```
 
 ## df_mm
@@ -166,23 +176,24 @@ driven at a speed of less than 20 km/h.
 The monitoring took place from 3rd May to 14th May, 2023, covering both
 weekdays and weekends.
 
-```{r}
-library(bcsa)
-```
-
 The `df_mm` data set has `r ncol(df_mm)` variables and `r nrow(df_mm)`
 observations. For an overview of the variable names, see the following
 table.
 
-```{r, eval=FALSE}
-df_mm
+```{r, eval=TRUE}
+df_mm |> 
+  head() |> 
+  gt::gt() |>
+  gt::as_raw_html()
 ```
 
 ```{r, echo=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |> 
   dplyr::filter(file_name == "df_mm.rda") |> 
   dplyr::select(variable_name:description) |> 
-  knitr::kable()
+  knitr::kable() |> 
+  kableExtra::kable_styling() |> 
+  kableExtra::scroll_box(height = "400px")
 ```
 
 ## df_mm_road_type
@@ -191,23 +202,24 @@ This dataset is collected during mobile monitoring and is the same as
 `df_mm`, except that the highways and non-highways are demarcated in
 this dataset.
 
-```{r}
-library(bcsa)
-```
-
 The `df_mm_road_type` data set has `r ncol(df_mm_road_type)` variables
 and `r nrow(df_mm_road_type)` observations. For an overview of the
 variable names, see the following table.
 
-```{r, eval=FALSE}
-df_mm_road_type
+```{r, eval=TRUE}
+df_mm_road_type |> 
+  head() |> 
+  gt::gt() |>
+  gt::as_raw_html()
 ```
 
 ```{r, echo=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |> 
   dplyr::filter(file_name == "df_mm_road_type.rda") |> 
   dplyr::select(variable_name:description) |> 
-  knitr::kable()
+  knitr::kable() |> 
+  kableExtra::kable_styling() |> 
+  kableExtra::scroll_box(height = "400px")
 ```
 
 ## df_pm
@@ -224,23 +236,24 @@ This method was implemented twice in each settlement, from 9:00 a.m. to
 11:30 a.m. and from 2:00 p.m. to 4:30 p.m., between the 19th to 25th of
 May, 2023, covering weekdays.
 
-```{r}
-library(bcsa)
-```
-
 The `df_pm` data set has `r ncol(df_pm)` variables and `r nrow(df_pm)`
 observations. For an overview of the variable names, see the following
 table.
 
-```{r, eval=FALSE}
-df_pm
+```{r, eval=TRUE}
+df_pm |> 
+  head() |> 
+  gt::gt() |>
+  gt::as_raw_html()
 ```
 
 ```{r, echo=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |> 
   dplyr::filter(file_name == "df_pm.rda") |> 
   dplyr::select(variable_name:description) |> 
-  knitr::kable()
+  knitr::kable() |> 
+  kableExtra::kable_styling() |> 
+  kableExtra::scroll_box(height = "400px")
 ```
 
 ## df_pm_trips
@@ -250,23 +263,24 @@ the times when the open waste burning. These times are combined with the
 personal monitoring data in the `df_pm` dataset, which resulted in the
 `df_pm_trips` dataset.
 
-```{r}
-library(bcsa)
-```
-
 The `df_pm_trips` data set has `r ncol(df_pm_trips)` variables and
 `r nrow(df_pm_trips)` observations. For an overview of the variable
 names, see the following table.
 
-```{r, eval=FALSE}
-df_pm_trips
+```{r, eval=TRUE}
+df_pm_trips |> 
+  head() |> 
+  gt::gt() |>
+  gt::as_raw_html()
 ```
 
 ```{r, echo=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |> 
   dplyr::filter(file_name == "df_pm_trips.rda") |> 
   dplyr::select(variable_name:description) |> 
-  knitr::kable()
+  knitr::kable() |> 
+  kableExtra::kable_styling() |> 
+  kableExtra::scroll_box(height = "400px")
 ```
 
 ## df_sm
@@ -276,23 +290,24 @@ stationary monitoring was conducted in two specific areas, one planned
 and one unplanned. The monitoring campaign spanned from 13th July to
 22nd August during the winter season.
 
-```{r}
-library(bcsa)
-```
-
 The `df_sm` data set has `r ncol(df_sm)` variables and `r nrow(df_sm)`
 observations. For an overview of the variable names, see the following
 table.
 
-```{r, eval=FALSE}
-df_sm
+```{r, eval=TRUE}
+df_sm |> 
+  head() |> 
+  gt::gt() |>
+  gt::as_raw_html()
 ```
 
 ```{r, echo=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |> 
   dplyr::filter(file_name == "df_sm.rda") |> 
   dplyr::select(variable_name:description) |> 
-  knitr::kable()
+  knitr::kable() |> 
+  kableExtra::kable_styling() |> 
+  kableExtra::scroll_box(height = "400px")
 ```
 
 ## df_collocation
@@ -301,32 +316,35 @@ For quality assurance, the two sensors were collocated multiple times
 throughout the study: twice during mobile monitoring, twice during AAE
 experiments, and before and after stationary monitoring.
 
-```{r}
-library(bcsa)
-```
-
 The `df_collocation` data set has `r ncol(df_collocation)` variables and
 `r nrow(df_collocation)` observations. For an overview of the variable
 names, see the following table.
 
-```{r, eval=FALSE}
-df_collocation
+```{r, eval=TRUE}
+df_collocation |> 
+  head() |> 
+  gt::gt() |>
+  gt::as_raw_html()
 ```
+
 
 ```{r, echo=FALSE}
 readr::read_csv("data-raw/dictionary.csv") |> 
   dplyr::filter(file_name == "df_collocation.rda") |> 
   dplyr::select(variable_name:description) |> 
-  knitr::kable()
+  knitr::kable() |> 
+  kableExtra::kable_styling() |> 
+  kableExtra::scroll_box(height = "400px")
 ```
 
 ## License
 
-Data are available as [CC-BY]().
+Data are available as
+[CC-BY](https://github.com/Global-Health-Engineering/bcsa/blob/main/LICENSE.md).
 
 ## Citation
 
-Please cite using:
+Please cite this package using:
 
 ```{r}
 citation("bcsa")

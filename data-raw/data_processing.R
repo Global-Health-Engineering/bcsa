@@ -385,13 +385,6 @@ usethis::use_data(df_aae,
                   df_collocation,
                   overwrite = TRUE)
 
-usethis::use_r("df_aae")
-usethis::use_r("df_mm")
-usethis::use_r("df_mm_road_type")
-usethis::use_r("df_pm")
-usethis::use_r("df_pm_trips")
-usethis::use_r("df_sm")
-usethis::use_r("df_collocation")
 
 # Export processed data to csv and xlsx files ----------------------------------
 

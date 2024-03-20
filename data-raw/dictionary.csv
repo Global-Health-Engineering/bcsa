@@ -1,377 +1,146 @@
 directory,file_name,variable_name,variable_type,description
-<<<<<<< HEAD
-data/,aae_calculated.rda,id,double,
-data/,aae_calculated.rda,emission_source,character,
-data/,aae_calculated.rda,exp_type,character,
-data/,aae_calculated.rda,aae_wo_bg_corr,double,
-data/,aae_calculated.rda,aae_bg_corr,double,
-data/,aae_uv_ir.rda,serial_number,character,
-data/,aae_uv_ir.rda,session_id,double,
-data/,aae_uv_ir.rda,date,double,
-data/,aae_uv_ir.rda,time,double,
-data/,aae_uv_ir.rda,lat,double,
-data/,aae_uv_ir.rda,long,double,
-data/,aae_uv_ir.rda,uv_bcc,double,
-data/,aae_uv_ir.rda,blue_bcc,double,
-data/,aae_uv_ir.rda,green_bcc,double,
-data/,aae_uv_ir.rda,red_bcc,double,
-data/,aae_uv_ir.rda,ir_bcc,double,
-data/,aae_uv_ir.rda,uv_babs,double,
-data/,aae_uv_ir.rda,blue_babs,double,
-data/,aae_uv_ir.rda,green_babs,double,
-data/,aae_uv_ir.rda,red_babs,double,
-data/,aae_uv_ir.rda,ir_babs,double,
-data/,aae_uv_ir.rda,date_time,double,
-data/,aae_uv_ir.rda,day_type,character,
-data/,aae_uv_ir.rda,id,double,
-data/,aae_uv_ir.rda,date_start,double,
-data/,aae_uv_ir.rda,date_end,double,
-data/,aae_uv_ir.rda,start_time,double,
-data/,aae_uv_ir.rda,end_time,double,
-data/,aae_uv_ir.rda,exp_type,character,
-data/,aae_uv_ir.rda,emission_source,character,
-data/,aae_uv_ir.rda,comment,character,
-data/,aae_uv_ir.rda,aae_uv_ir,double,
-data/,aae_uv_ir.rda,aae_blue_ir,double,
-data/,df_aae_exp.rda,id,double,
-data/,df_aae_exp.rda,emission_source,character,
-data/,df_aae_exp.rda,exp_type,character,
-data/,df_aae_exp.rda,aae_raw_data,double,
-data/,df_aae_exp.rda,aae_wo_bg_corr,double,
-data/,df_aae_exp.rda,aae_bg_corr,double,
-data/,df_aae.rda,id,double,
-data/,df_aae.rda,emission_source,character,
-data/,df_aae.rda,exp_type,character,
-data/,df_aae.rda,aae_raw_data,double,
-data/,df_aae.rda,aae_wo_bg_corr,double,
-data/,df_aae.rda,aae_bg_corr,double,
-=======
-data/,df_aae.rda,serial_number,character,
-data/,df_aae.rda,session_id,double,
-data/,df_aae.rda,date,double,
-data/,df_aae.rda,time,double,
-data/,df_aae.rda,lat,double,
-data/,df_aae.rda,long,double,
-data/,df_aae.rda,uv_bcc,double,
-data/,df_aae.rda,blue_bcc,double,
-data/,df_aae.rda,ir_bcc,double,
-data/,df_aae.rda,uv_babs,double,
-data/,df_aae.rda,blue_babs,double,
-data/,df_aae.rda,ir_babs,double,
-data/,df_aae.rda,date_time,double,
-data/,df_aae.rda,day_type,character,
-data/,df_aae.rda,id,double,
-data/,df_aae.rda,date_start,double,
-data/,df_aae.rda,date_end,double,
-data/,df_aae.rda,start_time,double,
-data/,df_aae.rda,end_time,double,
-data/,df_aae.rda,exp_type,character,
-data/,df_aae.rda,emission_source,character,
->>>>>>> main
-data/,df_collocation.rda,serial_number,character,
-data/,df_collocation.rda,session_id,double,
-data/,df_collocation.rda,date,double,
-data/,df_collocation.rda,time,double,
-data/,df_collocation.rda,lat,double,
-data/,df_collocation.rda,long,double,
-data/,df_collocation.rda,uv_bcc,double,
-data/,df_collocation.rda,blue_bcc,double,
-<<<<<<< HEAD
-data/,df_collocation.rda,green_bcc,double,
-data/,df_collocation.rda,red_bcc,double,
-data/,df_collocation.rda,ir_bcc,double,
-data/,df_collocation.rda,uv_babs,double,
-data/,df_collocation.rda,blue_babs,double,
-data/,df_collocation.rda,green_babs,double,
-data/,df_collocation.rda,red_babs,double,
-=======
-data/,df_collocation.rda,ir_bcc,double,
-data/,df_collocation.rda,uv_babs,double,
-data/,df_collocation.rda,blue_babs,double,
->>>>>>> main
-data/,df_collocation.rda,ir_babs,double,
-data/,df_collocation.rda,date_time,double,
-data/,df_collocation.rda,day_type,character,
-data/,df_collocation.rda,id,double,
-data/,df_collocation.rda,date_start,double,
-data/,df_collocation.rda,date_end,double,
-<<<<<<< HEAD
-data/,df_collocation.rda,exp_type,character,
-data/,df_collocation.rda,emission_source,character,
-data/,df_collocation.rda,comment,character,
-data/,df_collocation.rda,aae_uv_ir,double,
-data/,df_collocation.rda,aae_blue_ir,double,
-data/,df_collocation.rda,id_road_type,double,
-data/,df_collocation.rda,settlement_id,character,
-data/,df_collocation.rda,time_of_day,character,
-data/,df_collocation.rda,collocation,character,
-data/,df_collocation.rda,dc_1,character,
-data/,df_collocation.rda,dc_2,character,
-data/,df_collocation.rda,type_of_settlement,character,
-data/,df_collocation.rda,start_time,double,
-data/,df_collocation.rda,end_time,double,
-data/,df_collocation.rda,type_of_road,character,
-data/,df_met.rda,serial_number,character,
-data/,df_met.rda,session_id,double,
-data/,df_met.rda,date,double,
-data/,df_met.rda,time,double,
-data/,df_met.rda,lat,double,
-data/,df_met.rda,long,double,
-data/,df_met.rda,uv_bcc,double,
-data/,df_met.rda,blue_bcc,double,
-data/,df_met.rda,green_bcc,double,
-data/,df_met.rda,red_bcc,double,
-data/,df_met.rda,ir_bcc,double,
-data/,df_met.rda,uv_babs,double,
-data/,df_met.rda,blue_babs,double,
-data/,df_met.rda,green_babs,double,
-data/,df_met.rda,red_babs,double,
-data/,df_met.rda,ir_babs,double,
-data/,df_met.rda,date_time,double,
-data/,df_met.rda,day_type,character,
-data/,df_met.rda,id,double,
-data/,df_met.rda,date_start,double,
-data/,df_met.rda,date_end,double,
-data/,df_met.rda,start_time,double,
-data/,df_met.rda,end_time,double,
-data/,df_met.rda,exp_type,character,
-data/,df_met.rda,emission_source,character,
-data/,df_met.rda,comment,character,
-data/,df_met.rda,aae_uv_ir,double,
-data/,df_met.rda,aae_blue_ir,double,
-data/,df_met.rda,settlement_id,character,
-data/,df_met.rda,time_of_day,character,
-data/,df_met.rda,dc,character,
-data/,df_met.rda,type_of_settlement,character,
-=======
-data/,df_collocation.rda,start_time,double,
-data/,df_collocation.rda,end_time,double,
-data/,df_collocation.rda,exp_type,character,
-data/,df_collocation.rda,settlement_id,character,
-data/,df_collocation.rda,time_of_day,character,
-data/,df_collocation.rda,type_of_settlement,character,
-data/,df_mm.rda,serial_number,character,
-data/,df_mm.rda,session_id,double,
-data/,df_mm.rda,date,double,
-data/,df_mm.rda,time,double,
-data/,df_mm.rda,lat,double,
-data/,df_mm.rda,long,double,
-data/,df_mm.rda,uv_bcc,double,
-data/,df_mm.rda,blue_bcc,double,
-data/,df_mm.rda,ir_bcc,double,
-data/,df_mm.rda,uv_babs,double,
-data/,df_mm.rda,blue_babs,double,
-data/,df_mm.rda,ir_babs,double,
-data/,df_mm.rda,date_time,double,
-data/,df_mm.rda,day_type,character,
-data/,df_mm.rda,id,double,
-data/,df_mm.rda,date_start,double,
-data/,df_mm.rda,date_end,double,
-data/,df_mm.rda,exp_type,character,
-data/,df_mm.rda,emission_source,character,
-data/,df_mm.rda,comment,character,
-data/,df_mm.rda,id_road_type,double,
-data/,df_mm.rda,settlement_id,character,
-data/,df_mm.rda,time_of_day,character,
-data/,df_mm.rda,collocation,character,
-data/,df_mm.rda,dc_1,character,
-data/,df_mm.rda,dc_2,character,
-data/,df_mm.rda,type_of_settlement,character,
-data/,df_mm.rda,start_time,double,
-data/,df_mm.rda,end_time,double,
-data/,df_mm.rda,type_of_road,character,
->>>>>>> main
-data/,df_mm_road_type.rda,serial_number,character,
-data/,df_mm_road_type.rda,session_id,double,
-data/,df_mm_road_type.rda,date,double,
-data/,df_mm_road_type.rda,time,double,
-data/,df_mm_road_type.rda,lat,double,
-data/,df_mm_road_type.rda,long,double,
-data/,df_mm_road_type.rda,uv_bcc,double,
-data/,df_mm_road_type.rda,blue_bcc,double,
-<<<<<<< HEAD
-data/,df_mm_road_type.rda,green_bcc,double,
-data/,df_mm_road_type.rda,red_bcc,double,
-data/,df_mm_road_type.rda,ir_bcc,double,
-data/,df_mm_road_type.rda,uv_babs,double,
-data/,df_mm_road_type.rda,blue_babs,double,
-data/,df_mm_road_type.rda,green_babs,double,
-data/,df_mm_road_type.rda,red_babs,double,
-=======
-data/,df_mm_road_type.rda,ir_bcc,double,
-data/,df_mm_road_type.rda,uv_babs,double,
-data/,df_mm_road_type.rda,blue_babs,double,
->>>>>>> main
-data/,df_mm_road_type.rda,ir_babs,double,
-data/,df_mm_road_type.rda,date_time,double,
-data/,df_mm_road_type.rda,day_type,character,
-data/,df_mm_road_type.rda,id,double,
-data/,df_mm_road_type.rda,date_start,double,
-data/,df_mm_road_type.rda,date_end,double,
-data/,df_mm_road_type.rda,start_time,double,
-data/,df_mm_road_type.rda,end_time,double,
-data/,df_mm_road_type.rda,exp_type,character,
-<<<<<<< HEAD
-data/,df_mm_road_type.rda,emission_source,character,
-data/,df_mm_road_type.rda,comment,character,
-data/,df_mm_road_type.rda,aae_uv_ir,double,
-data/,df_mm_road_type.rda,aae_blue_ir,double,
-data/,df_mm_road_type.rda,settlement_id,character,
-data/,df_mm.rda,serial_number,character,
-data/,df_mm.rda,session_id,double,
-data/,df_mm.rda,date,double,
-data/,df_mm.rda,time,double,
-data/,df_mm.rda,lat,double,
-data/,df_mm.rda,long,double,
-data/,df_mm.rda,uv_bcc,double,
-data/,df_mm.rda,blue_bcc,double,
-data/,df_mm.rda,green_bcc,double,
-data/,df_mm.rda,red_bcc,double,
-data/,df_mm.rda,ir_bcc,double,
-data/,df_mm.rda,uv_babs,double,
-data/,df_mm.rda,blue_babs,double,
-data/,df_mm.rda,green_babs,double,
-data/,df_mm.rda,red_babs,double,
-data/,df_mm.rda,ir_babs,double,
-data/,df_mm.rda,date_time,double,
-data/,df_mm.rda,day_type,character,
-data/,df_mm.rda,id,double,
-data/,df_mm.rda,date_start,double,
-data/,df_mm.rda,date_end,double,
-data/,df_mm.rda,start_time,double,
-data/,df_mm.rda,end_time,double,
-data/,df_mm.rda,exp_type,character,
-data/,df_mm.rda,emission_source,character,
-data/,df_mm.rda,comment,character,
-data/,df_mm.rda,aae_uv_ir,double,
-data/,df_mm.rda,aae_blue_ir,double,
-data/,df_mm.rda,main_exp,character,
-data/,df_monitoring.rda,serial_number,character,
-data/,df_monitoring.rda,session_id,double,
-data/,df_monitoring.rda,date,double,
-data/,df_monitoring.rda,time,double,
-data/,df_monitoring.rda,lat,double,
-data/,df_monitoring.rda,long,double,
-data/,df_monitoring.rda,uv_bcc,double,
-data/,df_monitoring.rda,blue_bcc,double,
-data/,df_monitoring.rda,green_bcc,double,
-data/,df_monitoring.rda,red_bcc,double,
-data/,df_monitoring.rda,ir_bcc,double,
-data/,df_monitoring.rda,uv_babs,double,
-data/,df_monitoring.rda,blue_babs,double,
-data/,df_monitoring.rda,green_babs,double,
-data/,df_monitoring.rda,red_babs,double,
-data/,df_monitoring.rda,ir_babs,double,
-data/,df_monitoring.rda,date_time,double,
-data/,df_monitoring.rda,day_type,character,
-data/,df_monitoring.rda,id,double,
-data/,df_monitoring.rda,date_start,double,
-data/,df_monitoring.rda,date_end,double,
-data/,df_monitoring.rda,exp_type,character,
-data/,df_monitoring.rda,emission_source,character,
-data/,df_monitoring.rda,comment,character,
-data/,df_monitoring.rda,aae_uv_ir,double,
-data/,df_monitoring.rda,aae_blue_ir,double,
-data/,df_monitoring.rda,id_road_type,double,
-data/,df_monitoring.rda,settlement_id,character,
-data/,df_monitoring.rda,time_of_day,character,
-data/,df_monitoring.rda,collocation,character,
-data/,df_monitoring.rda,dc_1,character,
-data/,df_monitoring.rda,dc_2,character,
-data/,df_monitoring.rda,type_of_settlement,character,
-data/,df_monitoring.rda,start_time,double,
-data/,df_monitoring.rda,end_time,double,
-data/,df_monitoring.rda,type_of_road,character,
-data/,df_monitoring.rda,dc,character,
-data/,df_monitoring.rda,main_exp,character,
-data/,df_negative_count.rda,exp_type,character,
-data/,df_negative_count.rda,neg_irbcc,double,
-data/,df_negative_count.rda,neg_irbcc_3,double,
-data/,df_negative_count.rda,neg_irbcc_5,double,
-data/,df_negative_count.rda,neg_irbcc_7,double,
-data/,df_pm_trips.rda,date_time,double,
-data/,df_pm_trips.rda,atmosphericpressure (kPa),double,
-data/,df_pm_trips.rda,precipitation (mm),double,
-data/,df_pm_trips.rda,radiation (W/m2),double,
-data/,df_pm_trips.rda,relativehumidity (-),double,
-data/,df_pm_trips.rda,temperature (degrees Celsius),double,
-data/,df_pm_trips.rda,winddirection,double,
-data/,df_pm_trips.rda,windgusts (m/s),double,
-data/,df_pm_trips.rda,windspeed,double,
-data/,df_pm_trips.rda,id,double,
-data/,df_pm_trips.rda,serial_number,character,
-data/,df_pm_trips.rda,session_id,double,
-data/,df_pm_trips.rda,date_start,double,
-data/,df_pm_trips.rda,date_end,double,
-data/,df_pm_trips.rda,start_time,double,
-data/,df_pm_trips.rda,end_time,double,
-data/,df_pm_trips.rda,exp_type,character,
-data/,df_pm_trips.rda,emission_source,character,
-data/,df_pm_trips.rda,comment,character,
-=======
-data/,df_mm_road_type.rda,settlement_id,character,
-data/,df_mm_road_type.rda,time_of_day,character,
-data/,df_mm_road_type.rda,type_of_settlement,character,
->>>>>>> main
-data/,df_pm.rda,id,double,
-data/,df_pm.rda,serial_number,character,
-data/,df_pm.rda,session_id,double,
-data/,df_pm.rda,date_start,double,
-data/,df_pm.rda,date_end,double,
-data/,df_pm.rda,start_time,double,
-data/,df_pm.rda,end_time,double,
-data/,df_pm.rda,exp_type,character,
-<<<<<<< HEAD
-data/,df_pm.rda,emission_source,character,
-data/,df_pm.rda,comment,character,
-data/,df_pm.rda,event,character,
-data/,df_pm.rda,time,double,
-data/,df_pm.rda,comments,logical,
-data/,df_pm.rda,settlement_id,character,
-=======
-data/,df_pm.rda,event,character,
-data/,df_pm.rda,time,double,
-data/,df_pm.rda,settlement_id,character,
-data/,df_pm_trips.rda,serial_number,character,
-data/,df_pm_trips.rda,session_id,double,
-data/,df_pm_trips.rda,date,double,
-data/,df_pm_trips.rda,time,double,
-data/,df_pm_trips.rda,lat,double,
-data/,df_pm_trips.rda,long,double,
-data/,df_pm_trips.rda,uv_bcc,double,
-data/,df_pm_trips.rda,blue_bcc,double,
-data/,df_pm_trips.rda,ir_bcc,double,
-data/,df_pm_trips.rda,uv_babs,double,
-data/,df_pm_trips.rda,blue_babs,double,
-data/,df_pm_trips.rda,ir_babs,double,
-data/,df_pm_trips.rda,date_time,double,
-data/,df_pm_trips.rda,day_type,character,
-data/,df_pm_trips.rda,id,double,
-data/,df_pm_trips.rda,date_start,double,
-data/,df_pm_trips.rda,date_end,double,
-data/,df_pm_trips.rda,start_time,double,
-data/,df_pm_trips.rda,end_time,double,
-data/,df_pm_trips.rda,exp_type,character,
-data/,df_pm_trips.rda,settlement_id,character,
-data/,df_sm.rda,serial_number,character,
-data/,df_sm.rda,session_id,double,
-data/,df_sm.rda,date,double,
-data/,df_sm.rda,time,double,
-data/,df_sm.rda,lat,double,
-data/,df_sm.rda,long,double,
-data/,df_sm.rda,uv_bcc,double,
-data/,df_sm.rda,blue_bcc,double,
-data/,df_sm.rda,ir_bcc,double,
-data/,df_sm.rda,uv_babs,double,
-data/,df_sm.rda,blue_babs,double,
-data/,df_sm.rda,ir_babs,double,
-data/,df_sm.rda,date_time,double,
-data/,df_sm.rda,day_type,character,
-data/,df_sm.rda,id,double,
-data/,df_sm.rda,date_start,double,
-data/,df_sm.rda,date_end,double,
-data/,df_sm.rda,start_time,double,
-data/,df_sm.rda,end_time,double,
-data/,df_sm.rda,exp_type,character,
-data/,df_sm.rda,main_exp,character,
->>>>>>> main
+data/,df_aae.rda,serial_number,character,serial number of the MA200 monitoring from which the data is collected
+data/,df_aae.rda,session_id,double,session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)
+data/,df_aae.rda,date,double,date of monitoring
+data/,df_aae.rda,time,double,time of monitoring
+data/,df_aae.rda,lat,double,latitude of location of monitoring
+data/,df_aae.rda,long,double,longitude of location of monitoring
+data/,df_aae.rda,uv_bcc,double,concentration of black carbon at the UV (ultravoilet) wavelength channel in ng/m3
+data/,df_aae.rda,blue_bcc,double,concentration of black carbon at the Blue wavelength channel in ng/m3
+data/,df_aae.rda,ir_bcc,double,concentration of black carbon at the IR (infrared) wavelength channel in ng/m3
+data/,df_aae.rda,uv_babs,double,absorption coefficient of black carbon at the UV (ultravoilet) wavelength channel
+data/,df_aae.rda,blue_babs,double,absorption coefficient of black carbon at the Blue wavelength channel
+data/,df_aae.rda,ir_babs,double,absorption coefficient of black carbon at the IR (infrared) wavelength channel
+data/,df_aae.rda,date_time,double,date and time of monitoring
+data/,df_aae.rda,day_type,character,type of day of monitoring - weekend or weeday 
+data/,df_aae.rda,id,double,id is a unique identifier given to every monitoring session and experiment given in the data structure
+data/,df_aae.rda,date_start,double,starting date of the experiment
+data/,df_aae.rda,date_end,double,end date of the experiment
+data/,df_aae.rda,start_time,double,starting time of the experiment
+data/,df_aae.rda,end_time,double,end time of the experiment
+data/,df_aae.rda,exp_type,character,type of experiment
+data/,df_aae.rda,emission_source,character,source of emission
+data/,df_collocation.rda,serial_number,character,serial number of the MA200 monitoring from which the data is collected
+data/,df_collocation.rda,session_id,double,session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)
+data/,df_collocation.rda,date,double,date of monitoring
+data/,df_collocation.rda,time,double,time of monitoring
+data/,df_collocation.rda,lat,double,latitude of location of monitoring
+data/,df_collocation.rda,long,double,longitude of location of monitoring
+data/,df_collocation.rda,uv_bcc,double,concentration of black carbon at the UV (ultravoilet) wavelength channel in ng/m3
+data/,df_collocation.rda,blue_bcc,double,concentration of black carbon at the Blue wavelength channel in ng/m3
+data/,df_collocation.rda,ir_bcc,double,concentration of black carbon at the IR (infrared) wavelength channel in ng/m3
+data/,df_collocation.rda,uv_babs,double,absorption coefficient of black carbon at the UV (ultravoilet) wavelength channel
+data/,df_collocation.rda,blue_babs,double,absorption coefficient of black carbon at the Blue wavelength channel
+data/,df_collocation.rda,ir_babs,double,absorption coefficient of black carbon at the IR (infrared) wavelength channel
+data/,df_collocation.rda,date_time,double,date and time of monitoring
+data/,df_collocation.rda,day_type,character,type of day of monitoring - weekend or weeday 
+data/,df_collocation.rda,id,double,id is a unique identifier given to every monitoring session and experiment given in the data structure
+data/,df_collocation.rda,date_start,double,starting date of the experiment
+data/,df_collocation.rda,date_end,double,end date of the experiment
+data/,df_collocation.rda,start_time,double,starting time of the experiment
+data/,df_collocation.rda,end_time,double,end time of the experiment
+data/,df_collocation.rda,exp_type,character,type of experiment
+data/,df_collocation.rda,main_exp,character,the experiment phase during which the sensors were collocated
+data/,df_mm.rda,serial_number,character,serial number of the MA200 monitoring from which the data is collected
+data/,df_mm.rda,session_id,double,session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)
+data/,df_mm.rda,date,double,date of monitoring
+data/,df_mm.rda,time,double,time of monitoring
+data/,df_mm.rda,lat,double,latitude of location of monitoring
+data/,df_mm.rda,long,double,longitude of location of monitoring
+data/,df_mm.rda,uv_bcc,double,concentration of black carbon at the UV (ultravoilet) wavelength channel in ng/m3
+data/,df_mm.rda,blue_bcc,double,concentration of black carbon at the Blue wavelength channel in ng/m3
+data/,df_mm.rda,ir_bcc,double,concentration of black carbon at the IR (infrared) wavelength channel in ng/m3
+data/,df_mm.rda,uv_babs,double,absorption coefficient of black carbon at the UV (ultravoilet) wavelength channel
+data/,df_mm.rda,blue_babs,double,absorption coefficient of black carbon at the Blue wavelength channel
+data/,df_mm.rda,ir_babs,double,absorption coefficient of black carbon at the IR (infrared) wavelength channel
+data/,df_mm.rda,date_time,double,date and time of monitoring
+data/,df_mm.rda,day_type,character,type of day of monitoring - weekend or weeday 
+data/,df_mm.rda,id,double,id is a unique identifier given to every monitoring session and experiment given in the data structure
+data/,df_mm.rda,date_start,double,starting date of the experiment
+data/,df_mm.rda,date_end,double,end date of the experiment
+data/,df_mm.rda,exp_type,character,type of experiment
+data/,df_mm.rda,settlement_id,character,settlement name at which the monitoring was conducted
+data/,df_mm.rda,time_of_day,character,"the days are divided into three types - morning, first half and second half"
+data/,df_mm.rda,type_of_settlement,character,type of settlement - formal or informal
+data/,df_mm.rda,start_time,double,starting time of the experiment
+data/,df_mm.rda,end_time,double,ending time of the experiment
+data/,df_mm_road_type.rda,serial_number,character,serial number of the MA200 monitoring from which the data is collected
+data/,df_mm_road_type.rda,session_id,double,session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)
+data/,df_mm_road_type.rda,date,double,date of monitoring
+data/,df_mm_road_type.rda,time,double,time of monitoring
+data/,df_mm_road_type.rda,lat,double,latitude of location of monitoring
+data/,df_mm_road_type.rda,long,double,longitude of location of monitoring
+data/,df_mm_road_type.rda,uv_bcc,double,concentration of black carbon at the UV (ultravoilet) wavelength channel in ng/m3
+data/,df_mm_road_type.rda,blue_bcc,double,concentration of black carbon at the Blue wavelength channel in ng/m3
+data/,df_mm_road_type.rda,ir_bcc,double,concentration of black carbon at the IR (infrared) wavelength channel in ng/m3
+data/,df_mm_road_type.rda,uv_babs,double,absorption coefficient of black carbon at the UV (ultravoilet) wavelength channel
+data/,df_mm_road_type.rda,blue_babs,double,absorption coefficient of black carbon at the Blue wavelength channel
+data/,df_mm_road_type.rda,ir_babs,double,absorption coefficient of black carbon at the IR (infrared) wavelength channel
+data/,df_mm_road_type.rda,date_time,double,date and time of monitoring
+data/,df_mm_road_type.rda,day_type,character,type of day of monitoring - weekend or weeday 
+data/,df_mm_road_type.rda,id,double,id is a unique identifier given to every monitoring session and experiment given in the data structure
+data/,df_mm_road_type.rda,date_start,double,starting date of the experiment
+data/,df_mm_road_type.rda,date_end,double,end date of the experiment
+data/,df_mm_road_type.rda,start_time,double,starting time of the experiment
+data/,df_mm_road_type.rda,end_time,double,end time of the experiment
+data/,df_mm_road_type.rda,exp_type,character,type of experiment
+data/,df_mm_road_type.rda,settlement_id,character,settlement name at which the monitoring was conducted
+data/,df_mm_road_type.rda,time_of_day,character,"the days are divided into three types - morning, first half and second half"
+data/,df_mm_road_type.rda,type_of_settlement,character,type of settlement - formal or informal
+data/,df_mm_road_type.rda,id_road_type,double,a unique id given to different roads sections
+data/,df_mm_road_type.rda,type_of_road,character,roads are categorised as highways and non-highways
+data/,df_pm.rda,serial_number,character,serial number of the MA200 monitoring from which the data is collected
+data/,df_pm.rda,session_id,double,session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)
+data/,df_pm.rda,date,double,date of monitoring
+data/,df_pm.rda,time,double,time of monitoring
+data/,df_pm.rda,lat,double,latitude of location of monitoring
+data/,df_pm.rda,long,double,longitude of location of monitoring
+data/,df_pm.rda,uv_bcc,double,concentration of black carbon at the UV (ultravoilet) wavelength channel in ng/m3
+data/,df_pm.rda,blue_bcc,double,concentration of black carbon at the Blue wavelength channel in ng/m3
+data/,df_pm.rda,ir_bcc,double,concentration of black carbon at the IR (infrared) wavelength channel in ng/m3
+data/,df_pm.rda,uv_babs,double,absorption coefficient of black carbon at the UV (ultravoilet) wavelength channel
+data/,df_pm.rda,blue_babs,double,absorption coefficient of black carbon at the Blue wavelength channel
+data/,df_pm.rda,ir_babs,double,absorption coefficient of black carbon at the IR (infrared) wavelength channel
+data/,df_pm.rda,date_time,double,date and time of monitoring
+data/,df_pm.rda,day_type,character,type of day of monitoring - weekend or weeday 
+data/,df_pm.rda,id,double,id is a unique identifier given to every monitoring session and experiment given in the data structure
+data/,df_pm.rda,date_start,double,starting date of the experiment
+data/,df_pm.rda,date_end,double,end date of the experiment
+data/,df_pm.rda,start_time,double,starting time of the experiment
+data/,df_pm.rda,end_time,double,end time of the experiment
+data/,df_pm.rda,exp_type,character,type of experiment
+data/,df_pm.rda,settlement_id,character,settlement name at which the monitoring was conducted
+data/,df_pm.rda,time_of_day,character,"the days are divided into three types - morning, first half and second half"
+data/,df_pm.rda,type_of_settlement,character,type of settlement - formal or informal
+data/,df_pm_trips.rda,serial_number,character,serial number of the MA200 monitoring from which the data is collected
+data/,df_pm_trips.rda,session_id,double,session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)
+data/,df_pm_trips.rda,date,double,date of monitoring
+data/,df_pm_trips.rda,time,double,time when a burning event was observed
+data/,df_pm_trips.rda,id,double,id is a unique identifier given to every monitoring session and experiment given in the data structure
+data/,df_pm_trips.rda,date_start,double,starting date of the experiment
+data/,df_pm_trips.rda,date_end,double,ending date of the experiment
+data/,df_pm_trips.rda,start_time,double,starting time of the experiment
+data/,df_pm_trips.rda,end_time,double,ending time of the experiment
+data/,df_pm_trips.rda,exp_type,character,type of experiment
+data/,df_pm_trips.rda,settlement_id,character,settlement name at which the monitoring was conducted
+data/,df_sm.rda,serial_number,character,serial number of the MA200 monitoring from which the data is collected
+data/,df_sm.rda,session_id,double,session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)
+data/,df_sm.rda,date,double,date of monitoring
+data/,df_sm.rda,time,double,time of monitoring
+data/,df_sm.rda,lat,double,latitude of location of monitoring
+data/,df_sm.rda,long,double,longitude of location of monitoring
+data/,df_sm.rda,uv_bcc,double,concentration of black carbon at the UV (ultravoilet) wavelength channel in ng/m3
+data/,df_sm.rda,blue_bcc,double,concentration of black carbon at the Blue wavelength channel in ng/m3
+data/,df_sm.rda,ir_bcc,double,concentration of black carbon at the IR (infrared) wavelength channel in ng/m3
+data/,df_sm.rda,uv_babs,double,absorption coefficient of black carbon at the UV (ultravoilet) wavelength channel
+data/,df_sm.rda,blue_babs,double,absorption coefficient of black carbon at the Blue wavelength channel
+data/,df_sm.rda,ir_babs,double,absorption coefficient of black carbon at the IR (infrared) wavelength channel
+data/,df_sm.rda,date_time,double,date and time of monitoring
+data/,df_sm.rda,day_type,character,type of day of monitoring - weekend or weeday 
+data/,df_sm.rda,id,double,id is a unique identifier given to every monitoring session and experiment given in the data structure
+data/,df_sm.rda,date_start,double,starting date of the experiment
+data/,df_sm.rda,date_end,double,end date of the experiment
+data/,df_sm.rda,start_time,double,starting time of the experiment
+data/,df_sm.rda,end_time,double,end time of the experiment
+data/,df_sm.rda,exp_type,character,type of experiment
+data/,df_sm.rda,settlement_id,character,settlement name at which the monitoring was conducted

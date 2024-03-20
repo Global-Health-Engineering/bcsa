@@ -30,6 +30,3 @@ get_variable_info <- function(data, directory = "", file_name = "") {
 
   return(variable_info)
 }
-
-# Specify values for directory and file_name
-

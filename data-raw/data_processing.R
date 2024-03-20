@@ -385,9 +385,7 @@ usethis::use_data(df_aae,
                   df_collocation,
                   overwrite = TRUE)
 
-
-openwashdata::generate_roxygen_docs("data-raw/dictionary.csv", output_file_path = "R/df_aae.R")
-
+input_df <- read.csv("data-raw/dictionary.csv")
 # Export processed data to csv and xlsx files ----------------------------------
 
 readr::write_csv(df_aae, here::here("inst", "extdata", "df_aae.csv"))

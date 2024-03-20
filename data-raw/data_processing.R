@@ -286,7 +286,12 @@ df_mm_road_type <- df_mm_0416 |>
          !long %in% 0) |>
   #4038 values (only 3 were removed)
   #remove values during sensor collocation (remove 420 monitor - random)
-  filter(!id %in% c(17:24,65:72))
+  filter(!id %in% c(17:24,65:72)) |>
+  select(-emission_source,
+         -comment,
+         -collocation,
+         -dc_1,
+         -dc_2)
   #3240 values
 
 # create data files of each experiment ---------------------------------------------

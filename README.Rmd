@@ -23,8 +23,6 @@ knitr::opts_chunk$set(
 )
 
 library(tidyverse)
-library(sf)
-library(tmap)
 library(bcsa)
 ```
 

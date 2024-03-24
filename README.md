@@ -20,7 +20,7 @@ The package includes the following seven datasets:
     non-highways (non_main_roads) in eigth settlements
 4.  Personal monitoring data in four settlements
 5.  Data on times when open waste burning was observed during the
-    personal monitoring combined with personal monitoring data
+    personal monitoring 
 6.  Raw monitoring data from stationary monitoring in two settlements
 7.  Data when the two LAC monitors are placed and run next to each other
     to check data quality

@@ -1,3 +1,11 @@
+#' Mobile monitoring data classified by highways (main_road) and
+#' non-highways (non_main_roads) in eight settlements
+#'
+#' Raw data on spatial distribution of light absorbing carbon concentrations in
+#' four formal and four informal settlements, obtained by mobile monitoring.
+#' The highways and the non-highways are demarcated in this dataset.
+#'
+#' @format A tibble with 3540 rows and 25 variables:
 #' \describe{
 #'   \item{serial_number}{serial number of the MA200 monitoring from which the data is collected}
 #'   \item{session_id}{session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)}

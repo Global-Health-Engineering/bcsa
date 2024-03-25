@@ -1,0 +1,49 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.5.0
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "bcsa" in publications use:'
+type: software
+license: CC-BY-4.0
+title: 'bcsa: What the Package Does (One Line, Title Case)'
+version: 0.0.0.9000
+abstract: The bcsa package provide datasets for source apportionment of light absorbing
+  carbon (LAC) in Blantyre, Malawi. The package contains data on Absorption Angstrom
+  Exponent experiments determination of local pollution sources. The package also
+  contains data on spatial distribution and ambient concentrations of LAC concentrations.
+  This study used the MA200 micro-aethalometer to measure the LAC concentrations.
+  The MA200 measures the LAC concentrations in real-time at five different wavelengths,
+  that allows for source apportionment.
+authors:
+- family-names: Vijay
+  given-names: Saloni
+  email: svijay@ethz.ch
+  orcid: https://orcid.org/0000-0001-5883-5308
+- family-names: Chilunga
+  given-names: Hope Kelvin
+  email: chilungakelvin@gmail.com
+  orcid: https://orcid.org/0000-0003-4216-6319
+- family-names: Khonje
+  given-names: Lennox
+  email: lennoxkhonje@gmail.com
+  orcid: https://orcid.org/0009-0002-0005-1097
+- family-names: Kamjombo
+  given-names: Jack
+  email: jackkajombo@gmail.com
+  orcid: https://orcid.org/0009-0009-3949-9359
+- family-names: Tilley
+  given-names: Elizabeth
+  email: tilleye@ethz.ch
+  orcid: https://orcid.org/0000-0002-2095-9724
+- family-names: Schöbitz
+  given-names: Lars
+  email: lschoebitz@ethz.ch
+  orcid: https://orcid.org/0000-0003-2196-5015
+date-released: '2024-03-25'
+contact:
+- family-names: Vijay
+  given-names: Saloni
+  email: svijay@ethz.ch
+  orcid: https://orcid.org/0000-0001-5883-5308

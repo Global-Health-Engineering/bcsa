@@ -33,3 +33,4 @@
 #'   \item{id_road_type}{a unique id given to different roads sections}
 #'   \item{type_of_road}{roads are categorised as highways and non-highways}
 #' }
+"df_mm_road_type"

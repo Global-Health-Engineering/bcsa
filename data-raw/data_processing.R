@@ -372,7 +372,8 @@ df_sm <- df_all_raw |>
 df_collocation <- df_all_raw |>
   right_join(id_sc, by = "id") |>
   select(-emission_source,
-         -comment)
+         -comment) |>
+  as_tibble()
 
 # exporting data --------------------------------------------------------------
 

@@ -28,3 +28,4 @@
 #'   \item{exp_type}{type of experiment}
 #'   \item{settlement_id}{settlement name at which the monitoring was conducted}
 #' }
+"df_sm"

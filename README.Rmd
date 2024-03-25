@@ -31,6 +31,12 @@ library(bcsa)
 
 # bcsa
 
+<!-- badges: start -->
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+<!-- badges: end -->
+
+
+
 The goal of `bcsa` is to provide datasets for source apportionment of
 light absorbing carbon (LAC) in Blantyre, Malawi. This package combines
 datasets collected as part of two projects. The first project is on

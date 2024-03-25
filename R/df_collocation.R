@@ -1,3 +1,8 @@
+#' ABC
+#'
+#' ABC
+#'
+#' @format A tibble with 6037 rows and 21 variables:
 #' \describe{
 #'   \item{serial_number}{serial number of the MA200 monitoring from which the data is collected}
 #'   \item{session_id}{session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)}
@@ -21,3 +26,4 @@
 #'   \item{exp_type}{type of experiment}
 #'   \item{main_exp}{the experiment phase during which the sensors were collocated}
 #' }
+"df_collocation"

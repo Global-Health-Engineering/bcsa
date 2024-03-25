@@ -30,3 +30,4 @@
 #'   \item{time_of_day}{the days are divided into three types - morning, first half and second half}
 #'   \item{type_of_settlement}{type of settlement - formal or informal}
 #' }
+"df_pm"

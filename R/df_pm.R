@@ -1,3 +1,10 @@
+#' Personal monitoring data in four settlements
+#'
+#' Raw data on spatial distribution of light absorbing carbon concentrations in
+#' four informal settlements, obtained by personal monitoring. A person wore the
+#' MA200 monitor and conducted the monitoring.
+#'
+#' @format A tibble with 1108 rows and 23 variables:
 #' \describe{
 #'   \item{serial_number}{serial number of the MA200 monitoring from which the data is collected}
 #'   \item{session_id}{session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)}
@@ -23,3 +30,4 @@
 #'   \item{time_of_day}{the days are divided into three types - morning, first half and second half}
 #'   \item{type_of_settlement}{type of settlement - formal or informal}
 #' }
+"df_pm"

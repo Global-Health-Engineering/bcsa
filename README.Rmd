@@ -31,6 +31,12 @@ library(bcsa)
 
 # bcsa
 
+<!-- badges: start -->
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+<!-- badges: end -->
+
+
+
 The goal of `bcsa` is to provide datasets for source apportionment of
 light absorbing carbon (LAC) in Blantyre, Malawi. This package combines
 datasets collected as part of two projects. The first project is on
@@ -42,14 +48,14 @@ and stationary monitoring in Blantyre.
 
 The package includes the following seven datasets:
 
-1.  Data of experiments to determine AAE values
-2.  Mobile monitoring data in eight settlements
-3.  Mobile monitoring data classified by highways (main_road) and
-    non-highways (non_main_roads) in eigth settlements
-4.  Personal monitoring data in four settlements
-5.  Data on times when open waste burning was observed during the
+1.  `df_aae`: Data of experiments to determine AAE values
+2.  `df_mm`: Mobile monitoring data in eight settlements
+3.  `df_mm_road_type`: Mobile monitoring data classified by highways (main_road) and
+    non-highways (non_main_roads) in eight settlements
+4.  `df_pm`: Personal monitoring data in four settlements
+5.  `df_pm_trips`: Data on times when open waste burning was observed during the
     personal monitoring
-6.  Raw monitoring data from stationary monitoring in two settlements
+6.  `df_sm`: Raw data from stationary monitoring in two settlements
 7.  Data when the two LAC monitors are placed and run next to each other
     to check data quality
 

@@ -1,3 +1,10 @@
+#' Raw data from stationary monitoring in two settlements
+#'
+#' Data on ambient concentrations of light absorbing carbon during the months of
+#' July-August 2023. The data was collected from one formal and one informal
+#' settlement.
+#'
+#' @format A tibble with 20756 rows and 21 variables:
 #' \describe{
 #'   \item{serial_number}{serial number of the MA200 monitoring from which the data is collected}
 #'   \item{session_id}{session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)}
@@ -21,3 +28,4 @@
 #'   \item{exp_type}{type of experiment}
 #'   \item{settlement_id}{settlement name at which the monitoring was conducted}
 #' }
+"df_sm"

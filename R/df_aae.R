@@ -1,3 +1,11 @@
+#' Experiments to determine AAE values
+#'
+#' Raw data on experiments to determine AAE values of emissions from -
+#' diesel pick-up trucks, traffic in general, plastics burning, cardboard
+#' and paper burning, garden waste burning, synthetic textiles burning, cooking
+#' using firewood.
+#'
+#' @format A tibble with 1199 rows and 21 variables:
 #' \describe{
 #'   \item{serial_number}{serial number of the MA200 monitoring from which the data is collected}
 #'   \item{session_id}{session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)}
@@ -21,3 +29,4 @@
 #'   \item{exp_type}{type of experiment}
 #'   \item{emission_source}{source of emission}
 #' }
+"df_aae"

@@ -1,3 +1,11 @@
+#' Mobile monitoring data in eight settlements
+#'
+#' Raw data on spatial distribution of light absorbing carbon concentrations in
+#' eight settlements, obtained by mobile monitoring. Monitoring was conducted
+#' using the mobile vehicle, where the monitor was placed at the front window
+#' of the car.
+#'
+#' @format A tibble with 3540 rows and 25 variables:
 #' \describe{
 #'   \item{serial_number}{serial number of the MA200 monitoring from which the data is collected}
 #'   \item{session_id}{session number of the MA200 monitor (each monitoring session is automatically given a number in the output file of MA200 monitoring data)}
@@ -23,3 +31,4 @@
 #'   \item{start_time}{starting time of the experiment}
 #'   \item{end_time}{ending time of the experiment}
 #' }
+"df_mm"

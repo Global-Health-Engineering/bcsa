@@ -33,6 +33,7 @@ library(bcsa)
 
 <!-- badges: start -->
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![R-CMD-check](https://github.com/Global-Health-Engineering/bcsa/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Global-Health-Engineering/bcsa/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 
@@ -56,7 +57,7 @@ The package includes the following seven datasets:
 5.  `df_pm_trips`: Data on times when open waste burning was observed during the
     personal monitoring
 6.  `df_sm`: Raw data from stationary monitoring in two settlements
-7.  Data when the two LAC monitors are placed and run next to each other
+7.  `df_collocation`: Data when the two LAC monitors are placed and run next to each other
     to check data quality
 
 This study used the MA200 micro-aethalometer to measure the light

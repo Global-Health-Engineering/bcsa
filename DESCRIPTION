@@ -1,5 +1,6 @@
 Package: bcsa
-Title: What the Package Does (One Line, Title Case)
+Title: Data for source-apportionment of light absorbing carbon in Blantyre, 
+    Malawi
 Version: 0.0.0.9000
 Authors@R: c(
     person("Saloni", "Vijay", , "svijay@ethz.ch", role = c("aut", "cre"),

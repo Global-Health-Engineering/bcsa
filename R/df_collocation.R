@@ -1,6 +1,7 @@
-#' ABC
+#' Data when the two LAC monitors are placed and run next to each other
 #'
-#' ABC
+#' Data from the two MA200 monitors when placed next to each other at several
+#' times during the monitoring campaign
 #'
 #' @format A tibble with 6037 rows and 21 variables:
 #' \describe{

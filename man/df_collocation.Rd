@@ -3,7 +3,7 @@
 \docType{data}
 \name{df_collocation}
 \alias{df_collocation}
-\title{ABC}
+\title{Data when the two LAC monitors are placed and run next to each other}
 \format{
 A tibble with 6037 rows and 21 variables:
 \describe{
@@ -34,6 +34,7 @@ A tibble with 6037 rows and 21 variables:
 df_collocation
 }
 \description{
-ABC
+Data from the two MA200 monitors when placed next to each other at several
+times during the monitoring campaign
 }
 \keyword{datasets}

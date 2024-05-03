@@ -3155,7 +3155,7 @@ citation("bcsa")
 #> 
 #>   @Misc{vijaychilunga,
 #>     title = {bcsa: What the Package Does (One Line, Title Case)},
-#>     author = {Saloni Vijay and Hope Kelvin Chilunga and Lennox Khonje and Jack Kamjombo and Elizabeth Tilley and Lars Schöbitz},
+#>     author = {Saloni Vijay and Hope Kelvin Chilunga and Lennox Khonje and Jack Kajombo and Elizabeth Tilley and Lars Schöbitz},
 #>     year = {2024},
 #>     abstract = {The bcsa package provide datasets for source apportionment of light absorbing carbon (LAC) in Blantyre, Malawi. The package contains data on Absorption Angstrom Exponent experiments determination of local pollution sources. The package also contains data on spatial distribution and ambient concentrations of LAC concentrations. This study used the MA200 micro-aethalometer to measure the LAC concentrations. The MA200 measures the LAC concentrations in real-time at five different wavelengths, that allows for source apportionment.},
 #>     version = {0.0.0.9000},

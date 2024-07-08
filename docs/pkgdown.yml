@@ -1,8 +1,8 @@
-pandoc: 3.1.6
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-03-26T13:51Z
+last_built: 2024-07-08T13:07Z
 urls:
   reference: https://global-health-engineering.github.io/durbanplasticwaste/reference
   article: https://global-health-engineering.github.io/durbanplasticwaste/articles
